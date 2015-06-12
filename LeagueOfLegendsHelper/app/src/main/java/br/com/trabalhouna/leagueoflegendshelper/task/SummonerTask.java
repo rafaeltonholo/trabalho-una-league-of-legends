@@ -1,6 +1,6 @@
 package br.com.trabalhouna.leagueoflegendshelper.task;
 
-import br.com.trabalhouna.leagueoflegendshelper.fw.Constant;
+import br.com.trabalhouna.leagueoflegendshelper.fw.ApiHelper;
 import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
 
 /**
@@ -14,7 +14,7 @@ public class SummonerTask extends BaseTask<SummonerTO> {
     }
 
     public void callSummonerInfo(OnResponseListener<SummonerTO> responseListner, String summonerName) {
-        this.call(responseListner, Constant.API_URL_SUMMONER.replace("{server}", "br") + summonerName, MethodType.POST);
+        this.call(responseListner, ApiHelper.API_URL_SUMMONER.replace("{server}", "br") + summonerName, MethodType.POST);
     }
 
 }

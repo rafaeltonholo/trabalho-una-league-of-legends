@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import br.com.trabalhouna.leagueoflegendshelper.adapter.PlayerHistoryAdapter;
-import br.com.trabalhouna.leagueoflegendshelper.fw.Constant;
 import br.com.trabalhouna.leagueoflegendshelper.task.BaseTask;
 import br.com.trabalhouna.leagueoflegendshelper.task.PlayerHistoryTask;
 import br.com.trabalhouna.leagueoflegendshelper.to.PlayerHistoryTO;

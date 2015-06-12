@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import br.com.trabalhouna.leagueoflegendshelper.fw.Constant;
 import br.com.trabalhouna.leagueoflegendshelper.fw.Util;
 import br.com.trabalhouna.leagueoflegendshelper.to.BaseTO;
 
@@ -82,7 +81,7 @@ public abstract class BaseTask<T extends BaseTO> extends AsyncTask<String, Void,
     protected T doInBackground(String... params) {
         T model = null;
         try {
-            URL url = new URL(params[0] +"?api_key="+ Constant.API_KEY);
+            URL url = new URL(params[0]);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod(params[1]);
             http.setRequestProperty("Content-Type", "text/plain; charset=UTF-8");

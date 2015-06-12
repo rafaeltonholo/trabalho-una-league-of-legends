@@ -1,6 +1,6 @@
 package br.com.trabalhouna.leagueoflegendshelper.task;
 
-import br.com.trabalhouna.leagueoflegendshelper.fw.Constant;
+import br.com.trabalhouna.leagueoflegendshelper.fw.ApiHelper;
 import br.com.trabalhouna.leagueoflegendshelper.to.PlayerHistoryTO;
 
 /**
@@ -13,7 +13,7 @@ public class PlayerHistoryTask extends BaseTask<PlayerHistoryTO> {
     }
 
     public void callPlayerHistoryMatches(OnResponseListener<PlayerHistoryTO> responseListner, String summonerID) {
-        this.call(responseListner, Constant.API_URL_MATCH_HISTORY.replace("{server}", "br") + summonerID, MethodType.GET);
+        this.call(responseListner, ApiHelper.getApiUrlMatchHistory(ApiHelper.Server.BR ,summonerID), MethodType.GET);
     }
 
 }
