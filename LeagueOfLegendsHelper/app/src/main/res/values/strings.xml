@@ -3,4 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_match_history">Match History</string>
+    <string name="matchHistory">Histórico de partidas</string>
+    <string name="progressLoading">Carregando...</string>
+    <string name="loadingMatchHistory">Carregando o seu histórico de partidas...</string>
 </resources>

@@ -13,7 +13,7 @@ public class SummonerTask extends BaseTask<SummonerTO> {
         super(SummonerTO.class);
     }
 
-    public void callSummonerInfo(OnResponseListner<SummonerTO> responseListner, String summonerName) {
+    public void callSummonerInfo(OnResponseListener<SummonerTO> responseListner, String summonerName) {
         this.call(responseListner, Constant.API_URL_SUMMONER.replace("{server}", "br") + summonerName, MethodType.POST);
     }
 

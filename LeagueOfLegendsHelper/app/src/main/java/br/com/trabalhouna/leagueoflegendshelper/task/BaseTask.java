@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import br.com.trabalhouna.leagueoflegendshelper.fw.Constant;
 import br.com.trabalhouna.leagueoflegendshelper.fw.Util;
 import br.com.trabalhouna.leagueoflegendshelper.to.BaseTO;
 
@@ -18,9 +19,9 @@ import br.com.trabalhouna.leagueoflegendshelper.to.BaseTO;
  */
 public abstract class BaseTask<T extends BaseTO> extends AsyncTask<String, Void, T> {
     private Class<T> mClazz;
-    private OnResponseListner<T> mResponseListner;
+    private OnResponseListener<T> mResponseListner;
 
-    public interface OnResponseListner<T> {
+    public interface OnResponseListener<T> {
         /**
          * Método para tratar erro de resposta do servidor.
          * Será muito utilizado devido ao retorno do serviço REST da API da RIOT
@@ -40,6 +41,11 @@ public abstract class BaseTask<T extends BaseTO> extends AsyncTask<String, Void,
          * @param error - mensagem da exceção
          */
         void onFailure(String error);
+
+        /**
+         * Método que será executado antes da chamada assíncrona
+         */
+        void beforeCall();
     }
 
     public enum MethodType {
@@ -66,8 +72,9 @@ public abstract class BaseTask<T extends BaseTO> extends AsyncTask<String, Void,
      * @param url             - URL que será utilizada
      * @param methodType      - Tipo de Chamada {POST, GET}
      */
-    public final void call(OnResponseListner<T> responseListner, String url, MethodType methodType) {
+    public final void call(OnResponseListener<T> responseListner, String url, MethodType methodType) {
         this.mResponseListner = responseListner;
+        if(this.mResponseListner != null) this.mResponseListner.beforeCall();
         this.execute(url, methodType.toString());
     }
 
@@ -75,7 +82,7 @@ public abstract class BaseTask<T extends BaseTO> extends AsyncTask<String, Void,
     protected T doInBackground(String... params) {
         T model = null;
         try {
-            URL url = new URL(params[0]);
+            URL url = new URL(params[0] +"?api_key="+ Constant.API_KEY);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod(params[1]);
             http.setRequestProperty("Content-Type", "text/plain; charset=UTF-8");
