@@ -16,6 +16,6 @@ public final class Constant {
     public static final String API_URL_MATCH_HISTORY = "https://br.api.pvp.net/api/lol/{server}/v2.2/matchhistory";
     public static final String API_URL_STATIC_DATA = "https://global.api.pvp.net/api/lol/static-data/{server}/v1.2/";
 
-    public static final String API_KEY = "459cb852-9401-4bb2-8ca1-2225752a4bdd";
+    public static final String API_KEY = "ad9c283f-3ab0-44db-9afa-38ff1df02944";
 
 }

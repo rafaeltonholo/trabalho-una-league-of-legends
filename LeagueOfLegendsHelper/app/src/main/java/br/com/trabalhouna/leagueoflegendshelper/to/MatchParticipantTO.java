@@ -18,6 +18,7 @@ public class MatchParticipantTO extends BaseTO {
     private long summonerId;
     private String summonerName;
     private long teamId;
+    private List<MatchParticipantStatsTO> stats;
 
     public boolean isBot() {
         return bot;
@@ -98,4 +99,8 @@ public class MatchParticipantTO extends BaseTO {
     public void setTeamId(long teamId) {
         this.teamId = teamId;
     }
+
+    public List<MatchParticipantStatsTO> getStats() { return stats;}
+
+    public void setStats(List<MatchParticipantStatsTO> stats) {this.stats = stats;}
 }
