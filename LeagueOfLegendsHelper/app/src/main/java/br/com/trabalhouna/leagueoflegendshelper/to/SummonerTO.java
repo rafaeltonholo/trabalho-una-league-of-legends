@@ -51,4 +51,9 @@ public class SummonerTO extends BaseTO {
     public void setRevisionDate(long revisionDate) {
         this.revisionDate = revisionDate;
     }
+
+    @Override
+    public String toString() {
+        return String.format("SummonerName: %s, Level: %d, ID: %d", this.name, this.summonerLevel, this.id);
+    }
 }

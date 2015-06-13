@@ -6,9 +6,13 @@ package br.com.trabalhouna.leagueoflegendshelper.fw;
  * @since 11/06/2015
  */
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Type;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -50,5 +54,18 @@ public class Util {
         BigInteger hash = new BigInteger(1, md.digest(valor.getBytes()));
         sen = hash.toString(16);
         return sen;
+    }
+
+    public static <T> T convertFromJson(String json, Class<?> clazz) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+        return (T) gson.fromJson(json, clazz);
+    }
+
+    public static <T> T convertFromJson(String json, Type type) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+
+        return gson.fromJson(json, type);
     }
 }

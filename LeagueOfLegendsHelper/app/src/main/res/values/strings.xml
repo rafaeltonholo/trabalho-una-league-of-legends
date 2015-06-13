@@ -3,4 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="main_activity_login_button">Entrar</string>
+    <string name="main_activity_summoner_name">Nome de Summoner</string>
 </resources>
