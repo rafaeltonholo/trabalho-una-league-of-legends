@@ -32,3 +32,6 @@ proguard/
 /*/captures
 
 LeagueOfLegendsHelper/LeagueOfLegendsHelper.iml
+LeagueOfLegendsHelper/.idea/gradle.xml
+LeagueOfLegendsHelper/.idea/inspectionProfiles/profiles_settings.xml
+LeagueOfLegendsHelper/LeagueOfLegendsHelper.iml
