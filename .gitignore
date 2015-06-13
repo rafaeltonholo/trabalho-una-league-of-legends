@@ -26,8 +26,9 @@ proguard/
 # Log Files
 *.log
 
-/*/.idea/workspace.xml
+/*/.idea/*.xml
 /*/.idea/libraries
 .DS_Store
 /*/captures
 
+LeagueOfLegendsHelper/LeagueOfLegendsHelper.iml

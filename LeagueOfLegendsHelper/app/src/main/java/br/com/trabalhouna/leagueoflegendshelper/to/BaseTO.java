@@ -26,7 +26,7 @@ public class BaseTO implements Cloneable {
             return gson.fromJson(json, c);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            throw e;
         }
     }
 

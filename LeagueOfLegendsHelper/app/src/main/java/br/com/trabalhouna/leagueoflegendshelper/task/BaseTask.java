@@ -22,9 +22,9 @@ import br.com.trabalhouna.leagueoflegendshelper.fw.Util;
 public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
     private Class<?> mClazz;
     private TypeToken<T> mTypeToken;
-    private OnResponseListner<T> mResponseListner;
+    private OnResponseListener<T> mResponseListner;
 
-    public interface OnResponseListner<T> {
+    public interface OnResponseListener<T> {
         /**
          * Método para tratar erro de resposta do servidor.
          *
@@ -46,6 +46,11 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
          * @param error - mensagem da exceção
          */
         void onFailure(String error);
+
+        /**
+         * Método que será executado antes da chamada assíncrona
+         */
+        void beforeCall();
     }
 
     public enum MethodType {
@@ -78,8 +83,9 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
      * @param url             - URL que será utilizada
      * @param methodType      - Tipo de Chamada {POST, GET}
      */
-    protected final void call(OnResponseListner<T> responseListner, String url, MethodType methodType) {
+    public final void call(OnResponseListener<T> responseListner, String url, MethodType methodType) {
         this.mResponseListner = responseListner;
+        if(this.mResponseListner != null) this.mResponseListner.beforeCall();
         this.execute(url, methodType.toString());
     }
 
