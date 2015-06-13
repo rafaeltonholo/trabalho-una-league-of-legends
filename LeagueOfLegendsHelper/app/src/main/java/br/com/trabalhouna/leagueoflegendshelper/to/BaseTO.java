@@ -2,6 +2,7 @@ package br.com.trabalhouna.leagueoflegendshelper.to;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 /**
  * Created by Rafael
@@ -27,6 +28,10 @@ public class BaseTO implements Cloneable {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    public static Object createByJson(String json) {
+        return getGson().fromJson(json, JsonObject.class);
     }
 
     @Override

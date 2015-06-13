@@ -24,23 +24,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:text="Nome de Summoner" />
+            android:text="@string/main_activity_summoner_name" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/etxLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/editText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="23dp"
             android:background="@drawable/button_background"
-            android:text="Entrar" />
+            android:text="@string/main_activity_login_button" />
     </LinearLayout>
 </RelativeLayout>

@@ -1,5 +1,9 @@
 package br.com.trabalhouna.leagueoflegendshelper.task;
 
+import com.google.gson.reflect.TypeToken;
+
+import java.util.HashMap;
+
 import br.com.trabalhouna.leagueoflegendshelper.fw.ApiHelper;
 import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
 
@@ -8,13 +12,14 @@ import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
  *
  * @since 11/06/2015
  */
-public class SummonerTask extends BaseTask<SummonerTO> {
+public class SummonerTask extends BaseTask<HashMap<String, SummonerTO>> {
     public SummonerTask() {
-        super(SummonerTO.class);
+        super(new TypeToken<HashMap<String, SummonerTO>>() {
+        });
     }
 
-    public void callSummonerInfo(OnResponseListener<SummonerTO> responseListner, String summonerName) {
-        this.call(responseListner, ApiHelper.API_URL_SUMMONER.replace("{server}", "br") + summonerName, MethodType.POST);
+    public void callSummonerInfo(OnResponseListener<HashMap<String, SummonerTO>> responseListner, String summonerName) {
+        this.call(responseListner, ApiHelper.getApiUrlSummoner(ApiHelper.Server.BR, "by-name", summonerName), MethodType.GET);
     }
 
 }

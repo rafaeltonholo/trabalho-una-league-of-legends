@@ -7,4 +7,6 @@
     <string name="matchHistory">Histórico de partidas</string>
     <string name="progressLoading">Carregando...</string>
     <string name="loadingMatchHistory">Carregando o seu histórico de partidas...</string>
+    <string name="main_activity_login_button">Entrar</string>
+    <string name="main_activity_summoner_name">Nome de Summoner</string>
 </resources>

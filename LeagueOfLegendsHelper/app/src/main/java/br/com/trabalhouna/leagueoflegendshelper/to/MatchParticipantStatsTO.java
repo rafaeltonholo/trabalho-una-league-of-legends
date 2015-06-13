@@ -20,23 +20,43 @@ public class MatchParticipantStatsTO extends BaseTO {
     //Number of kills
     private long kills;
 
-    public long getAssists() {return assists;}
+    public long getAssists() {
+        return assists;
+    }
 
-    public void setAssists(long assists) {this.assists = assists;}
+    public void setAssists(long assists) {
+        this.assists = assists;
+    }
 
-    public long getChampLevel() {return champLevel;}
+    public long getChampLevel() {
+        return champLevel;
+    }
 
-    public void setChampLevel(long champLevel) {this.champLevel = champLevel;}
+    public void setChampLevel(long champLevel) {
+        this.champLevel = champLevel;
+    }
 
-    public long getDeaths() {return deaths;}
+    public long getDeaths() {
+        return deaths;
+    }
 
-    public void setDeaths(long deaths) {this.deaths = deaths;}
+    public void setDeaths(long deaths) {
+        this.deaths = deaths;
+    }
 
-    public long getFirstBloodKill() {return firstBloodKill;}
+    public long getFirstBloodKill() {
+        return firstBloodKill;
+    }
 
-    public void setFirstBloodKill(long firstBloodKill) {this.firstBloodKill = firstBloodKill;}
+    public void setFirstBloodKill(long firstBloodKill) {
+        this.firstBloodKill = firstBloodKill;
+    }
 
-    public long getKills() {return kills;}
+    public long getKills() {
+        return kills;
+    }
 
-    public void setKills(long kills) {this.kills = kills;}
+    public void setKills(long kills) {
+        this.kills = kills;
+    }
 }

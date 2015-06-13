@@ -9,7 +9,7 @@ public final class ApiHelper {
 
     private static final String API_KEY = "ad9c283f-3ab0-44db-9afa-38ff1df02944";
 
-    private static String serverAddress = "{server}";
+    private static String serverAddressToken = "{server}";
     private static final String API_URL_MATCH_HISTORY = "https://br.api.pvp.net/api/lol/{server}/v2.2/matchhistory/";
 
     private static String AddApiKey(String url) {
@@ -28,17 +28,31 @@ public final class ApiHelper {
 
 
     public static String getApiUrlMatchHistory(Server server, String summonerID) {
-        return AddApiKey((API_URL_MATCH_HISTORY + summonerID).replace(serverAddress, server.getValue()));
+        return AddApiKey((API_URL_MATCH_HISTORY + summonerID).replace(serverAddressToken, server.getValue()));
     }
 
-    public enum Server{
+    /**
+     * Retorna a URL Base da API de Summoner da RIOT
+     *
+     * @param server       - Servidor que irá buscar
+     * @param method       - Método da api de Summoner
+     * @param summonerName - Nome do invocador
+     * @return - Url base do summoner
+     */
+    public static String getApiUrlSummoner(Server server, String method, String summonerName) {
+        return AddApiKey(API_URL_SUMMONER.replace(serverAddressToken, server.getValue()).concat(method).concat(summonerName));
+    }
+
+    public enum Server {
         BR("br");
 
         private String value;
-        Server(String value){
+
+        Server(String value) {
             this.value = value;
         }
-        public String getValue(){
+
+        public String getValue() {
             return value;
         }
     }
