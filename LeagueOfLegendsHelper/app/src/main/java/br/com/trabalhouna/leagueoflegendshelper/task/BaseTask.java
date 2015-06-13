@@ -85,7 +85,7 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
      */
     public final void call(OnResponseListener<T> responseListner, String url, MethodType methodType) {
         this.mResponseListner = responseListner;
-        if(this.mResponseListner != null) this.mResponseListner.beforeCall();
+        if (this.mResponseListner != null) this.mResponseListner.beforeCall();
         this.execute(url, methodType.toString());
     }
 

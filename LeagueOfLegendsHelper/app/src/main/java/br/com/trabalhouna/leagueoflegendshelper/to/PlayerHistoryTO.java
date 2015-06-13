@@ -8,7 +8,11 @@ import java.util.List;
 public class PlayerHistoryTO extends BaseTO {
     private List<MatchSummaryTO> matches;
 
-    public List<MatchSummaryTO> getMatches() {return matches;}
+    public List<MatchSummaryTO> getMatches() {
+        return matches;
+    }
 
-    public void setMatches(List<MatchSummaryTO> matches) {this.matches = matches;}
+    public void setMatches(List<MatchSummaryTO> matches) {
+        this.matches = matches;
+    }
 }

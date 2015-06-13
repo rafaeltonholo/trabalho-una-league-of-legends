@@ -4,7 +4,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.HashMap;
 
-import br.com.trabalhouna.leagueoflegendshelper.fw.Constant;
+import br.com.trabalhouna.leagueoflegendshelper.fw.ApiHelper;
 import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
 
 /**
@@ -18,8 +18,8 @@ public class SummonerTask extends BaseTask<HashMap<String, SummonerTO>> {
         });
     }
 
-    public void callSummonerInfo(OnResponseListner<HashMap<String, SummonerTO>> responseListner, String summonerName) {
-        this.call(responseListner, Constant.API_URL_SUMMONER.replace("{server}", "br").concat("by-name/").concat(summonerName).concat("?api_key=").concat(Constant.API_KEY), MethodType.GET);
+    public void callSummonerInfo(OnResponseListener<HashMap<String, SummonerTO>> responseListner, String summonerName) {
+        this.call(responseListner, ApiHelper.getApiUrlSummoner(ApiHelper.Server.BR, "by-name", summonerName), MethodType.GET);
     }
 
 }

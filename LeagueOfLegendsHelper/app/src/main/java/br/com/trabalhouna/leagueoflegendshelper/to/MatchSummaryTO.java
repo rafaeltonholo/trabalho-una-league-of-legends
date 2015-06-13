@@ -14,27 +14,51 @@ public class MatchSummaryTO extends BaseTO {
     private List<MatchParticipantTO> participants;
 
 
-    public List<MatchParticipantTO> getParticipants() {return participants;}
+    public List<MatchParticipantTO> getParticipants() {
+        return participants;
+    }
 
-    public void setParticipants(List<MatchParticipantTO> participants) {this.participants = participants;}
+    public void setParticipants(List<MatchParticipantTO> participants) {
+        this.participants = participants;
+    }
 
-    public long getMatchId() {return matchId;}
+    public long getMatchId() {
+        return matchId;
+    }
 
-    public void setMatchId(long matchId) {this.matchId = matchId;}
+    public void setMatchId(long matchId) {
+        this.matchId = matchId;
+    }
 
-    public long getMatchDuration() {return matchDuration;}
+    public long getMatchDuration() {
+        return matchDuration;
+    }
 
-    public void setMatchDuration(long matchDuration) {this.matchDuration = matchDuration;}
+    public void setMatchDuration(long matchDuration) {
+        this.matchDuration = matchDuration;
+    }
 
-    public String getMatchMode() {return matchMode;}
+    public String getMatchMode() {
+        return matchMode;
+    }
 
-    public void setMatchMode(String matchMode) {this.matchMode = matchMode;}
+    public void setMatchMode(String matchMode) {
+        this.matchMode = matchMode;
+    }
 
-    public String getMatchType() {return matchType;}
+    public String getMatchType() {
+        return matchType;
+    }
 
-    public void setMatchType(String matchType) {this.matchType = matchType;}
+    public void setMatchType(String matchType) {
+        this.matchType = matchType;
+    }
 
-    public String getRegion() {return region;}
+    public String getRegion() {
+        return region;
+    }
 
-    public void setRegion(String region) {this.region = region;}
+    public void setRegion(String region) {
+        this.region = region;
+    }
 }

@@ -63,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     }
                 };
 
-                task.callSummonerInfo(new BaseTask.OnResponseListner<HashMap<String, SummonerTO>>() {
+                task.callSummonerInfo(new BaseTask.OnResponseListener<HashMap<String, SummonerTO>>() {
                     @Override
                     public void onResponseError(int responseCode) {
                         switch (responseCode) {
@@ -140,6 +140,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 Toast.makeText(MainActivity.this, error, Toast.LENGTH_LONG).show();
                             }
                         });
+                    }
+
+                    @Override
+                    public void beforeCall() {
+
                     }
                 }, String.valueOf(mEtxLogin.getText()));
 

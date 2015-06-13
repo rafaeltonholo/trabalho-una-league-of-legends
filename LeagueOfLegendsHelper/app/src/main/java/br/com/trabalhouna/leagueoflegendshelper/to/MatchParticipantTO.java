@@ -100,7 +100,11 @@ public class MatchParticipantTO extends BaseTO {
         this.teamId = teamId;
     }
 
-    public List<MatchParticipantStatsTO> getStats() { return stats;}
+    public List<MatchParticipantStatsTO> getStats() {
+        return stats;
+    }
 
-    public void setStats(List<MatchParticipantStatsTO> stats) {this.stats = stats;}
+    public void setStats(List<MatchParticipantStatsTO> stats) {
+        this.stats = stats;
+    }
 }
