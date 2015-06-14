@@ -20,30 +20,6 @@ public class MatchParticipantTO extends BaseTO {
     private long teamId;
     private MatchParticipantStatsTO stats;
 
-    public boolean isBot() {
-        return bot;
-    }
-
-    public void setBot(boolean bot) {
-        this.bot = bot;
-    }
-
-    public long getChampionId() {
-        return championId;
-    }
-
-    public void setChampionId(long championId) {
-        this.championId = championId;
-    }
-
-    public MasteryTO[] getMasteries() {
-        return masteries;
-    }
-
-    public void setMasteries(MasteryTO[] masteries) {
-        this.masteries = masteries;
-    }
-
     public long getProfileIconId() {
         return profileIconId;
     }

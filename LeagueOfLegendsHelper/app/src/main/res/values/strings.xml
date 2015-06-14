@@ -3,10 +3,17 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_match_history">Match History</string>
-    <string name="matchHistory">Histórico de partidas</string>
+    <string name="title_activity_match_history">Histórico de partidas</string>
     <string name="progressLoading">Carregando...</string>
     <string name="loadingMatchHistory">Carregando o seu histórico de partidas...</string>
     <string name="main_activity_login_button">Entrar</string>
     <string name="main_activity_summoner_name">Nome de Summoner</string>
+    <string name="txtMatchMode">Modo:</string>
+    <string name="txtMatchRegion">Região:</string>
+    <string name="txtMatchDuration">Duração:</string>
+    <string name="txtKills">K</string>
+    <string name="txtKDASeparator">/</string>
+    <string name="txtDeaths">D</string>
+    <string name="txtAssists">A</string>
+    <string name="txtDate">Data:</string>
 </resources>

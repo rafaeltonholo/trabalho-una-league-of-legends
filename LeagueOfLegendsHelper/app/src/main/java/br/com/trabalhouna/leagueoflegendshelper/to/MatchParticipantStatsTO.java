@@ -23,6 +23,9 @@ public class MatchParticipantStatsTO extends BaseTO {
     public long getAssists() {
         return assists;
     }
+    public String getAssistsString() {
+        return String.valueOf(assists);
+    }
 
     public void setAssists(long assists) {
         this.assists = assists;
@@ -39,7 +42,9 @@ public class MatchParticipantStatsTO extends BaseTO {
     public long getDeaths() {
         return deaths;
     }
-
+    public String getDeathsString() {
+        return String.valueOf(deaths);
+    }
     public void setDeaths(long deaths) {
         this.deaths = deaths;
     }
@@ -55,7 +60,9 @@ public class MatchParticipantStatsTO extends BaseTO {
     public long getKills() {
         return kills;
     }
-
+    public String getKillsString() {
+        return String.valueOf(kills);
+    }
     public void setKills(long kills) {
         this.kills = kills;
     }

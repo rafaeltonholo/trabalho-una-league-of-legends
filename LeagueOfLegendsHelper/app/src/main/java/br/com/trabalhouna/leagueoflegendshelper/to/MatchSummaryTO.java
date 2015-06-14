@@ -2,17 +2,40 @@ package br.com.trabalhouna.leagueoflegendshelper.to;
 
 import java.util.List;
 
+import br.com.trabalhouna.leagueoflegendshelper.fw.Util;
+
 /**
  * Created by Kelvin on 11/06/2015.
  */
 public class MatchSummaryTO extends BaseTO {
     private long matchId;
+    private long matchCreation;
     private long matchDuration;
     private String matchMode;
     private String matchType;
     private String region;
     private MatchParticipantTO[] participants;
+    private MatchParticipantIdentityTO[] participantIdentities;
 
+    public long getMatchCreation() {
+        return matchCreation;
+    }
+
+    public String getMatchCreationDateString() {
+        return Util.convertTime(matchCreation);
+    }
+
+    public void setMatchCreation(long matchCreation) {
+        this.matchCreation = matchCreation;
+    }
+
+    public MatchParticipantIdentityTO[] getParticipantIdentities() {
+        return participantIdentities;
+    }
+
+    public void setParticipantIdentities(MatchParticipantIdentityTO[] participantIdentities) {
+        this.participantIdentities = participantIdentities;
+    }
 
     public MatchParticipantTO[] getParticipants() {
         return participants;
@@ -32,6 +55,12 @@ public class MatchSummaryTO extends BaseTO {
 
     public long getMatchDuration() {
         return matchDuration;
+    }
+    public String getMatchDurationInMinutes(){
+        if(matchDuration != 0){
+            return String.valueOf(matchDuration / 60).replace(",",":") + "m";
+        }
+        return "N/A";
     }
 
     public void setMatchDuration(long matchDuration) {
