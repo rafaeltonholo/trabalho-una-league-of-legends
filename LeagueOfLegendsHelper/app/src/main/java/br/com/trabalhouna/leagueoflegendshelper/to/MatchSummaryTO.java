@@ -11,14 +11,14 @@ public class MatchSummaryTO extends BaseTO {
     private String matchMode;
     private String matchType;
     private String region;
-    private List<MatchParticipantTO> participants;
+    private MatchParticipantTO[] participants;
 
 
-    public List<MatchParticipantTO> getParticipants() {
+    public MatchParticipantTO[] getParticipants() {
         return participants;
     }
 
-    public void setParticipants(List<MatchParticipantTO> participants) {
+    public void setParticipants(MatchParticipantTO[] participants) {
         this.participants = participants;
     }
 

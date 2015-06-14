@@ -26,22 +26,22 @@ public class PlayerHistoryAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return this.playerHistory.getMatches().size();
+        return this.playerHistory.getMatches().length;
     }
 
     @Override
     public Object getItem(int position) {
-        return this.playerHistory.getMatches().get(position);
+        return this.playerHistory.getMatches()[position];
     }
 
     @Override
     public long getItemId(int position) {
-        return this.playerHistory.getMatches().get(position).getMatchId();
+        return this.playerHistory.getMatches()[position].getMatchId();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MatchSummaryTO match = this.playerHistory.getMatches().get(position);
+        MatchSummaryTO match = this.playerHistory.getMatches()[position];
 
         LayoutInflater inflater = (LayoutInflater)
                 context.getSystemService(context.LAYOUT_INFLATER_SERVICE);

@@ -15,7 +15,7 @@ public class MatchParticipantStatsTO extends BaseTO {
     private long deaths;
 
     //Flag indicating if participant got first blood
-    private long firstBloodKill;
+    private boolean firstBloodKill;
 
     //Number of kills
     private long kills;
@@ -44,11 +44,11 @@ public class MatchParticipantStatsTO extends BaseTO {
         this.deaths = deaths;
     }
 
-    public long getFirstBloodKill() {
+    public boolean getFirstBloodKill() {
         return firstBloodKill;
     }
 
-    public void setFirstBloodKill(long firstBloodKill) {
+    public void setFirstBloodKill(boolean firstBloodKill) {
         this.firstBloodKill = firstBloodKill;
     }
 
