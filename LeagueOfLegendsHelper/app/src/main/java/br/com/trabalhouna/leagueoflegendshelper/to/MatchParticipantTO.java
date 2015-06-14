@@ -10,39 +10,15 @@ import java.util.List;
 public class MatchParticipantTO extends BaseTO {
     private boolean bot;
     private long championId;
-    private List<MasteryTO> masteries;
+    private MasteryTO[] masteries;
     private long profileIconId;
-    private List<RuneTO> runes;
+    private RuneTO[] runes;
     private long spell1Id;
     private long spell2Id;
     private long summonerId;
     private String summonerName;
     private long teamId;
-    private List<MatchParticipantStatsTO> stats;
-
-    public boolean isBot() {
-        return bot;
-    }
-
-    public void setBot(boolean bot) {
-        this.bot = bot;
-    }
-
-    public long getChampionId() {
-        return championId;
-    }
-
-    public void setChampionId(long championId) {
-        this.championId = championId;
-    }
-
-    public List<MasteryTO> getMasteries() {
-        return masteries;
-    }
-
-    public void setMasteries(List<MasteryTO> masteries) {
-        this.masteries = masteries;
-    }
+    private MatchParticipantStatsTO stats;
 
     public long getProfileIconId() {
         return profileIconId;
@@ -52,11 +28,11 @@ public class MatchParticipantTO extends BaseTO {
         this.profileIconId = profileIconId;
     }
 
-    public List<RuneTO> getRunes() {
+    public RuneTO[] getRunes() {
         return runes;
     }
 
-    public void setRunes(List<RuneTO> runes) {
+    public void setRunes(RuneTO[] runes) {
         this.runes = runes;
     }
 
@@ -100,11 +76,11 @@ public class MatchParticipantTO extends BaseTO {
         this.teamId = teamId;
     }
 
-    public List<MatchParticipantStatsTO> getStats() {
+    public MatchParticipantStatsTO getStats() {
         return stats;
     }
 
-    public void setStats(List<MatchParticipantStatsTO> stats) {
+    public void setStats(MatchParticipantStatsTO stats) {
         this.stats = stats;
     }
 }

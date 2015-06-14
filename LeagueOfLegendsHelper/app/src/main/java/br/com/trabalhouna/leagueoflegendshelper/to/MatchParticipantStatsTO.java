@@ -15,13 +15,16 @@ public class MatchParticipantStatsTO extends BaseTO {
     private long deaths;
 
     //Flag indicating if participant got first blood
-    private long firstBloodKill;
+    private boolean firstBloodKill;
 
     //Number of kills
     private long kills;
 
     public long getAssists() {
         return assists;
+    }
+    public String getAssistsString() {
+        return String.valueOf(assists);
     }
 
     public void setAssists(long assists) {
@@ -39,23 +42,27 @@ public class MatchParticipantStatsTO extends BaseTO {
     public long getDeaths() {
         return deaths;
     }
-
+    public String getDeathsString() {
+        return String.valueOf(deaths);
+    }
     public void setDeaths(long deaths) {
         this.deaths = deaths;
     }
 
-    public long getFirstBloodKill() {
+    public boolean getFirstBloodKill() {
         return firstBloodKill;
     }
 
-    public void setFirstBloodKill(long firstBloodKill) {
+    public void setFirstBloodKill(boolean firstBloodKill) {
         this.firstBloodKill = firstBloodKill;
     }
 
     public long getKills() {
         return kills;
     }
-
+    public String getKillsString() {
+        return String.valueOf(kills);
+    }
     public void setKills(long kills) {
         this.kills = kills;
     }
