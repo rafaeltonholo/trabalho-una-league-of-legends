@@ -1,6 +1,5 @@
 package br.com.trabalhouna.leagueoflegendshelper.to;
 
-import java.util.List;
 
 /**
  * Created by Kelvin on 11/06/2015.

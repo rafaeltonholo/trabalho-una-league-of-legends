@@ -19,7 +19,7 @@ public class SummonerTask extends BaseTask<HashMap<String, SummonerTO>> {
     }
 
     public void callSummonerInfo(OnResponseListener<HashMap<String, SummonerTO>> responseListner, String summonerName) {
-        this.call(responseListner, ApiHelper.getApiUrlSummoner(ApiHelper.Server.BR, "by-name", summonerName), MethodType.GET);
+        this.call(responseListner, ApiHelper.getApiUrlSummoner(ApiHelper.Server.BR, "by-name/", summonerName), MethodType.GET);
     }
 
 }

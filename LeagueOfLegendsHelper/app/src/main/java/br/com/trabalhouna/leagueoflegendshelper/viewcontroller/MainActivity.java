@@ -1,8 +1,12 @@
 package br.com.trabalhouna.leagueoflegendshelper.viewcontroller;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,8 +14,11 @@ import android.widget.Toast;
 
 import java.net.HttpURLConnection;
 import java.util.HashMap;
+import java.util.Map;
 
 import br.com.trabalhouna.leagueoflegendshelper.R;
+import br.com.trabalhouna.leagueoflegendshelper.fw.Constants;
+import br.com.trabalhouna.leagueoflegendshelper.fw.ContentManager;
 import br.com.trabalhouna.leagueoflegendshelper.task.BaseTask;
 import br.com.trabalhouna.leagueoflegendshelper.task.SummonerTask;
 import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
@@ -71,7 +78,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 MainActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(MainActivity.this, "Bad Request", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(MainActivity.this, "Bad Request",
+                                                Toast.LENGTH_LONG).show();
                                     }
                                 });
                                 break;
@@ -79,7 +87,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 MainActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(MainActivity.this, "Sem autorização para executar o método", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(MainActivity.this,
+                                                "Sem autorização para executar o método",
+                                                Toast.LENGTH_LONG).show();
 
                                     }
                                 });
@@ -88,7 +98,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 MainActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(MainActivity.this, "Invocador não encontrado!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(MainActivity.this, "Invocador não encontrado!",
+                                                Toast.LENGTH_LONG).show();
 
                                     }
                                 });
@@ -97,7 +108,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 MainActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(MainActivity.this, "Rate limit exceeded!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(MainActivity.this, getString(R.string.riot_return_http_rate_limit),
+                                                Toast.LENGTH_LONG).show();
 
                                     }
                                 });
@@ -106,7 +118,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 MainActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(MainActivity.this, "Erro do servidor Interno!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(MainActivity.this, "Erro do servidor Interno!",
+                                                Toast.LENGTH_LONG).show();
 
                                     }
                                 });
@@ -115,7 +128,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                 MainActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast.makeText(MainActivity.this, "Servidor indisponível!", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(MainActivity.this, getString(R.string.riot_return_http_unavailable),
+                                                Toast.LENGTH_LONG).show();
                                     }
                                 });
                                 break;
@@ -123,13 +137,27 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                     }
 
                     @Override
-                    public void onSucess(final HashMap<String, SummonerTO> model) {
-                        MainActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(MainActivity.this, model.toString(), Toast.LENGTH_LONG).show();
+                    public void onSucess(final HashMap<String, SummonerTO> object) {
+                        Map.Entry<String, SummonerTO> entry = object.entrySet().iterator().next();
+                        if (entry != null) {
+                            final SummonerTO summoner = entry.getValue();
+
+                            boolean success = ContentManager.getInstance(MainActivity.this)
+                                    .sharedPrefsWrite(Constants.PREF_USER_ID,
+                                            Long.toString(summoner.getId()));
+
+                            if (success) {
+                                MainActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(MainActivity.this, summoner.toString(),
+                                                Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                Intent i = new Intent(MainActivity.this, MatchHistoryActivity.class);
+                                startActivity(i);
                             }
-                        });
+                        }
                     }
 
                     @Override
@@ -150,5 +178,27 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent it = new Intent(this, SettingsActivity.class);
+                startActivity(it);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
     }
 }

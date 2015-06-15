@@ -21,8 +21,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MatchHistory"
+            android:name=".viewcontroller.MatchHistoryActivity"
             android:label="@string/title_activity_match_history" />
+        <activity
+            android:name=".viewcontroller.SettingsActivity"
+            android:label="@string/title_activity_settings" />
     </application>
 
 </manifest>
