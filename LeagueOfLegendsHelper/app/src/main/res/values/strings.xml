@@ -22,4 +22,6 @@
     <string name="txtDeaths">D</string>
     <string name="txtAssists">A</string>
     <string name="txtDate">Data:</string>
+    <string name="riot_return_http_unavailable">Servidor indisponível!</string>
+    <string name="riot_return_http_rate_limit">Rate limit exceeded!</string>
 </resources>

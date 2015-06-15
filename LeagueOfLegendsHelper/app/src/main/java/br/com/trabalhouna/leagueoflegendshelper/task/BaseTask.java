@@ -36,9 +36,9 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
          * Caso o código de resposta do servidor seja OK(200),
          * retorna o modelo já parseado.
          *
-         * @param model - Modelo parseado do JSON de retorno
+         * @param object - Objeto parseado do JSON de retorno
          */
-        void onSucess(T model);
+        void onSucess(T object);
 
         /**
          * Caso haja algum erro por exceção, deverá ser tratado a forma de exibição aqui

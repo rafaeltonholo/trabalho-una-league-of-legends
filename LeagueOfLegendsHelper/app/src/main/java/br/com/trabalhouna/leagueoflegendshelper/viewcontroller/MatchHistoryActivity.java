@@ -1,22 +1,22 @@
 package br.com.trabalhouna.leagueoflegendshelper.viewcontroller;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
-
-import java.util.HashMap;
 
 import br.com.trabalhouna.leagueoflegendshelper.R;
 import br.com.trabalhouna.leagueoflegendshelper.adapter.PlayerHistoryAdapter;
+import br.com.trabalhouna.leagueoflegendshelper.fw.Constants;
+import br.com.trabalhouna.leagueoflegendshelper.fw.ContentManager;
 import br.com.trabalhouna.leagueoflegendshelper.task.BaseTask;
 import br.com.trabalhouna.leagueoflegendshelper.task.PlayerHistoryTask;
 import br.com.trabalhouna.leagueoflegendshelper.to.PlayerHistoryTO;
-import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
 
 
-public class MatchHistory extends ActionBarActivity {
+public class MatchHistoryActivity extends ActionBarActivity {
 
     private ListView matchHistory;
 
@@ -27,10 +27,14 @@ public class MatchHistory extends ActionBarActivity {
 
         matchHistory = (ListView) findViewById(R.id.listMatchHistory);
 
-        updateMatchHistory();
+        String summonerId = ContentManager.getInstance(MatchHistoryActivity.this)
+                .sharedPrefsRead(Constants.PREF_USER_ID, "");
+
+        if(!summonerId.equals(""))
+            updateMatchHistory(summonerId);
     }
 
-    public void updateMatchHistory() {
+    public void updateMatchHistory(String summonerId) {
 
         PlayerHistoryTask playerHistoryTask = new PlayerHistoryTask();
 
@@ -48,11 +52,11 @@ public class MatchHistory extends ActionBarActivity {
             }
 
             @Override
-            public void onSucess(PlayerHistoryTO model) {
+            public void onSucess(PlayerHistoryTO object) {
                 pd.dismiss();
 
-                if (model != null) {
-                    final PlayerHistoryAdapter adapter = new PlayerHistoryAdapter(model, MatchHistory.this);
+                if (object != null) {
+                    final PlayerHistoryAdapter adapter = new PlayerHistoryAdapter(object, MatchHistoryActivity.this);
 
                     runOnUiThread(new Runnable() {
                         @Override
@@ -73,7 +77,19 @@ public class MatchHistory extends ActionBarActivity {
                 pd.show();
             }
 
-        }, "543602");
+        }, summonerId);
+    }
+
+    // TODO Adicionar menu de configurações e opção para verificar times da partida atual do jogador
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return super.onOptionsItemSelected(item);
     }
 }
 
