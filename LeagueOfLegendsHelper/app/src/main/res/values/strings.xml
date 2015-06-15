@@ -14,4 +14,12 @@
     <string name="pref_server_default_value">BR</string>
     <string name="title_activity_settings">Configurações</string>
     <string name="pref_server_category">Servidores</string>
+    <string name="txtMatchMode">Modo:</string>
+    <string name="txtMatchRegion">Região:</string>
+    <string name="txtMatchDuration">Duração:</string>
+    <string name="txtKills">K</string>
+    <string name="txtKDASeparator">/</string>
+    <string name="txtDeaths">D</string>
+    <string name="txtAssists">A</string>
+    <string name="txtDate">Data:</string>
 </resources>
