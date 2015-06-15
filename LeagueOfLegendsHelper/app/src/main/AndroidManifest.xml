@@ -23,6 +23,9 @@
         <activity
             android:name=".MatchHistory"
             android:label="@string/title_activity_match_history" />
+        <activity
+            android:name=".viewcontroller.SettingsActivity"
+            android:label="@string/title_activity_settings" />
     </application>
 
 </manifest>

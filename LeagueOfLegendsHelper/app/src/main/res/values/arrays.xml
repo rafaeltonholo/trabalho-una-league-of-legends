@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_server_list">
+        <item>Brazil</item>
+        <item>EU Nordic &amp; East</item>
+        <item>EU West</item>
+        <item>Korea</item>
+        <item>Latin America North</item>
+        <item>Latin America South</item>
+        <item>North America</item>
+        <item>Oceania</item>
+        <item>Public Beta Environment</item>
+        <item>Russia</item>
+        <item>Turkey</item>
+    </string-array>
+    <string-array name="pref_server_values">
+        <item>BR</item>
+        <item>UNE</item>
+        <item>EUW</item>
+        <item>KR</item>
+        <item>LAN</item>
+        <item>LAS</item>
+        <item>NA</item>
+        <item>OCE</item>
+        <item>PBE</item>
+        <item>RU</item>
+        <item>TR</item>
+    </string-array>
+</resources>

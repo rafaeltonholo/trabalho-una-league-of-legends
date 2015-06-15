@@ -44,7 +44,17 @@ public final class ApiHelper {
     }
 
     public enum Server {
-        BR("br");
+        BR("br"),
+        EUNE("eune"),
+        EUW("euw"),
+        KR("kr"),
+        LAN("lan"),
+        LAS("las"),
+        NA("na"),
+        OCE("oce"),
+        PBE("pbe"),
+        RU("ru"),
+        TR("tr");
 
         private String value;
 
@@ -54,6 +64,18 @@ public final class ApiHelper {
 
         public String getValue() {
             return value;
+        }
+
+        public static Server parse(String value) {
+            Server enumerator = null;
+
+            switch (value.toLowerCase()) {
+                case "br":
+                    enumerator = BR;
+                    break;
+            }
+
+            return enumerator;
         }
     }
 }
