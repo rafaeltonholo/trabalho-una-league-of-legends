@@ -10,10 +10,17 @@ import android.content.SharedPreferences;
  */
 public final class Constants {
     public static final String SHARED_PREFS_NAME = "LOLHelperPrefs";
-    public static final String SHARED_PREFS_LOG_WRITE = SharedPreferences.class.getName().concat(".write");
-    public static final String SHARED_PREFS_LOG_REMOVE = SharedPreferences.class.getName().concat(".remove");
-    public static final String SHARED_PREFS_LOG_READ_ALL = SharedPreferences.class.getName().concat(".readAll");
-    public static final String SHARED_PREFS_LOG_READ = SharedPreferences.class.getName().concat(".read");
+    public static final String SHARED_PREFS_LOG_WRITE = SharedPreferences.class.getName()
+            .concat(".write");
+
+    public static final String SHARED_PREFS_LOG_REMOVE = SharedPreferences.class.getName()
+            .concat(".remove");
+
+    public static final String SHARED_PREFS_LOG_READ_ALL = SharedPreferences.class.getName()
+            .concat(".readAll");
+
+    public static final String SHARED_PREFS_LOG_READ = SharedPreferences.class.getName().
+            concat(".read");
 
     public static final String PREF_USER_ID = "USER_ID";
 }

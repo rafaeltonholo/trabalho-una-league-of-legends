@@ -30,7 +30,7 @@ public class MatchHistoryActivity extends ActionBarActivity {
         String summonerId = ContentManager.getInstance(MatchHistoryActivity.this)
                 .sharedPrefsRead(Constants.PREF_USER_ID, "");
 
-        if(!summonerId.equals(""))
+        if (!summonerId.equals(""))
             updateMatchHistory(summonerId);
     }
 
@@ -44,40 +44,42 @@ public class MatchHistoryActivity extends ActionBarActivity {
 
 
         //TODO: PEGAR SUMMONER ID SALVO
-        playerHistoryTask.callPlayerHistoryMatches(new BaseTask.OnResponseListener<PlayerHistoryTO>() {
+        playerHistoryTask.callPlayerHistoryMatches(this, summonerId,
+                new BaseTask.OnResponseListener<PlayerHistoryTO>() {
 
-            @Override
-            public void onResponseError(int responseCode) {
-                pd.dismiss();
-            }
+                    @Override
+                    public void onResponseError(int responseCode) {
+                        pd.dismiss();
+                    }
 
-            @Override
-            public void onSucess(PlayerHistoryTO object) {
-                pd.dismiss();
+                    @Override
+                    public void onSucess(PlayerHistoryTO object) {
+                        pd.dismiss();
 
-                if (object != null) {
-                    final PlayerHistoryAdapter adapter = new PlayerHistoryAdapter(object, MatchHistoryActivity.this);
+                        if (object != null) {
+                            final PlayerHistoryAdapter adapter = new PlayerHistoryAdapter(object,
+                                    MatchHistoryActivity.this);
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            matchHistory.setAdapter(adapter);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    matchHistory.setAdapter(adapter);
+                                }
+                            });
                         }
-                    });
-                }
-            }
+                    }
 
-            @Override
-            public void onFailure(String error) {
-                pd.dismiss();
-            }
+                    @Override
+                    public void onFailure(String error) {
+                        pd.dismiss();
+                    }
 
-            @Override
-            public void beforeCall() {
-                pd.show();
-            }
+                    @Override
+                    public void beforeCall() {
+                        pd.show();
+                    }
 
-        }, summonerId);
+                });
     }
 
     // TODO Adicionar menu de configurações e opção para verificar times da partida atual do jogador
