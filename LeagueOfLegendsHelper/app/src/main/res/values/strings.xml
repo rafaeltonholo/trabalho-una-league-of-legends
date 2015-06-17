@@ -8,8 +8,7 @@
     <string name="loadingMatchHistory">Carregando o seu histórico de partidas…</string>
     <string name="main_activity_login_button">Entrar</string>
     <string name="main_activity_summoner_name">Nome de Summoner</string>
-    <string name="pref_server_option">Selecione o Servidor utilizado para buscas</string>
-    <string name="pref_server_summary">Servidores { BR, UNE, EUW, KR, LAN, LAS, NA, OCE, PBE, RU, TR }</string>
+    <string name="pref_server_option">Servidor de busca</string>
     <string name="pref_server_dialog">Selecione o Servidor</string>
     <string name="pref_server_default_value">BR</string>
     <string name="title_activity_settings">Configurações</string>
@@ -24,4 +23,6 @@
     <string name="txtDate">Data:</string>
     <string name="riot_return_http_unavailable">Servidor indisponível!</string>
     <string name="riot_return_http_rate_limit">Rate limit exceeded!</string>
+    <string name="pref_server">pref_server</string>
+    <string name="msg_buscando_dados_servidor">Buscando dados no servidor. Aguarde…</string>
 </resources>

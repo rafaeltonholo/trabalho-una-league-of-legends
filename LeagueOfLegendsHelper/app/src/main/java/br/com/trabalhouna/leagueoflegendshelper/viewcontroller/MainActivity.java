@@ -41,140 +41,128 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnLogin:
                 final ProgressDialog pd = new ProgressDialog(this);
-                pd.setMessage("Buscando dados no servidor. Aguarde...");
+                pd.setMessage(getString(R.string.msg_buscando_dados_servidor));
                 pd.setCancelable(false);
                 pd.setCanceledOnTouchOutside(false);
                 pd.setIndeterminate(true);
 
-                SummonerTask task = new SummonerTask() {
-                    @Override
-                    protected void onPreExecute() {
-                        super.onPreExecute();
-                        MainActivity.this.runOnUiThread(new Runnable() {
+                SummonerTask task = new SummonerTask();
+
+                task.callSummonerInfo(this, String.valueOf(mEtxLogin.getText()),
+                        new BaseTask.OnResponseListener<HashMap<String, SummonerTO>>() {
                             @Override
-                            public void run() {
+                            public void onResponseError(int responseCode) {
+                                switch (responseCode) {
+                                    case HttpURLConnection.HTTP_BAD_REQUEST:
+                                        MainActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(MainActivity.this, "Bad Request",
+                                                        Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                        break;
+                                    case HttpURLConnection.HTTP_UNAUTHORIZED:
+                                        MainActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(MainActivity.this,
+                                                        "Sem autorização para executar o método",
+                                                        Toast.LENGTH_LONG).show();
+
+                                            }
+                                        });
+                                        break;
+                                    case HttpURLConnection.HTTP_NOT_FOUND:
+                                        MainActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(MainActivity.this,
+                                                        "Invocador não encontrado!",
+                                                        Toast.LENGTH_LONG).show();
+
+                                            }
+                                        });
+                                        break;
+                                    case 429:
+                                        MainActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(MainActivity.this,
+                                                        getString(R.string.riot_return_http_rate_limit),
+                                                        Toast.LENGTH_LONG).show();
+
+                                            }
+                                        });
+                                        break;
+                                    case HttpURLConnection.HTTP_INTERNAL_ERROR:
+                                        MainActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(MainActivity.this,
+                                                        "Erro do servidor Interno!",
+                                                        Toast.LENGTH_LONG).show();
+
+                                            }
+                                        });
+                                        break;
+                                    case HttpURLConnection.HTTP_UNAVAILABLE:
+                                        MainActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(MainActivity.this,
+                                                        getString(R.string.riot_return_http_unavailable),
+                                                        Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                        break;
+                                }
+                            }
+
+                            @Override
+                            public void onSucess(final HashMap<String, SummonerTO> object) {
+                                pd.dismiss();
+                                Map.Entry<String, SummonerTO> entry = object.entrySet().iterator()
+                                        .next();
+
+                                if (entry != null) {
+                                    final SummonerTO summoner = entry.getValue();
+
+                                    boolean success = ContentManager.getInstance(MainActivity.this)
+                                            .sharedPrefsWrite(Constants.PREF_USER_ID,
+                                                    Long.toString(summoner.getId()));
+
+                                    if (success) {
+                                        MainActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(MainActivity.this, summoner.toString(),
+                                                        Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+                                        Intent i = new Intent(MainActivity.this, MatchHistoryActivity.class);
+                                        startActivity(i);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(final String error) {
+                                pd.dismiss();
+
+                                MainActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(MainActivity.this, error, Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void beforeCall() {
                                 pd.show();
                             }
                         });
-                    }
-
-                    @Override
-                    protected void onPostExecute(HashMap<String, SummonerTO> summonerTO) {
-                        super.onPostExecute(summonerTO);
-                        MainActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                pd.dismiss();
-                            }
-                        });
-                    }
-                };
-
-                task.callSummonerInfo(new BaseTask.OnResponseListener<HashMap<String, SummonerTO>>() {
-                    @Override
-                    public void onResponseError(int responseCode) {
-                        switch (responseCode) {
-                            case HttpURLConnection.HTTP_BAD_REQUEST:
-                                MainActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(MainActivity.this, "Bad Request",
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                                break;
-                            case HttpURLConnection.HTTP_UNAUTHORIZED:
-                                MainActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(MainActivity.this,
-                                                "Sem autorização para executar o método",
-                                                Toast.LENGTH_LONG).show();
-
-                                    }
-                                });
-                                break;
-                            case HttpURLConnection.HTTP_NOT_FOUND:
-                                MainActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(MainActivity.this, "Invocador não encontrado!",
-                                                Toast.LENGTH_LONG).show();
-
-                                    }
-                                });
-                                break;
-                            case 429:
-                                MainActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(MainActivity.this, getString(R.string.riot_return_http_rate_limit),
-                                                Toast.LENGTH_LONG).show();
-
-                                    }
-                                });
-                                break;
-                            case HttpURLConnection.HTTP_INTERNAL_ERROR:
-                                MainActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(MainActivity.this, "Erro do servidor Interno!",
-                                                Toast.LENGTH_LONG).show();
-
-                                    }
-                                });
-                                break;
-                            case HttpURLConnection.HTTP_UNAVAILABLE:
-                                MainActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(MainActivity.this, getString(R.string.riot_return_http_unavailable),
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onSucess(final HashMap<String, SummonerTO> object) {
-                        Map.Entry<String, SummonerTO> entry = object.entrySet().iterator().next();
-                        if (entry != null) {
-                            final SummonerTO summoner = entry.getValue();
-
-                            boolean success = ContentManager.getInstance(MainActivity.this)
-                                    .sharedPrefsWrite(Constants.PREF_USER_ID,
-                                            Long.toString(summoner.getId()));
-
-                            if (success) {
-                                MainActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(MainActivity.this, summoner.toString(),
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                                Intent i = new Intent(MainActivity.this, MatchHistoryActivity.class);
-                                startActivity(i);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(final String error) {
-                        MainActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(MainActivity.this, error, Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void beforeCall() {
-
-                    }
-                }, String.valueOf(mEtxLogin.getText()));
 
                 break;
         }

@@ -44,26 +44,32 @@ public final class ApiHelper {
     }
 
     public enum Server {
-        BR("br"),
-        EUNE("eune"),
-        EUW("euw"),
-        KR("kr"),
-        LAN("lan"),
-        LAS("las"),
-        NA("na"),
-        OCE("oce"),
-        PBE("pbe"),
-        RU("ru"),
-        TR("tr");
+        BR("br", "Brazil"),
+        EUNE("eune", "EU Nordic & East"),
+        EUW("euw", "EU West"),
+        KR("kr", "Korea"),
+        LAN("lan", "Latin America North"),
+        LAS("las", "Latin America South"),
+        NA("na", "North America"),
+        OCE("oce", "Oceania"),
+        PBE("pbe", "Public Beta Environment"),
+        RU("ru", "Russia"),
+        TR("tr", "Turkey");
 
         private String value;
+        private String description;
 
-        Server(String value) {
+        Server(String value, String description) {
             this.value = value;
+            this.description = description;
         }
 
         public String getValue() {
             return value;
+        }
+
+        public String getDescription() {
+            return this.description;
         }
 
         public static Server parse(String value) {
@@ -73,6 +79,37 @@ public final class ApiHelper {
                 case "br":
                     enumerator = BR;
                     break;
+                case "eune":
+                    enumerator = EUNE;
+                    break;
+                case "euw":
+                    enumerator = EUW;
+                    break;
+                case "kr":
+                    enumerator = KR;
+                    break;
+                case "lan":
+                    enumerator = LAN;
+                    break;
+                case "las":
+                    enumerator = LAS;
+                    break;
+                case "na":
+                    enumerator = NA;
+                    break;
+                case "oce":
+                    enumerator = OCE;
+                    break;
+                case "pbe":
+                    enumerator = PBE;
+                    break;
+                case "ru":
+                    enumerator = RU;
+                    break;
+                case "tr":
+                    enumerator = TR;
+                    break;
+
             }
 
             return enumerator;
