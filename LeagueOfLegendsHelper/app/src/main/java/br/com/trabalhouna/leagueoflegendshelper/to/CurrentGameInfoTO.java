@@ -1,14 +1,12 @@
 package br.com.trabalhouna.leagueoflegendshelper.to;
 
-import java.util.List;
-
 /**
  * Created by Rafael
  *
  * @since 10/06/2015
  */
 public class CurrentGameInfoTO extends BaseTO {
-    private List<MatchBannedChampionTO> bannedChampions;
+    private MatchBannedChampionTO[] bannedChampions;
     private long gameId;
     private long gameLength;
     private String gameMode;
@@ -16,14 +14,14 @@ public class CurrentGameInfoTO extends BaseTO {
     private long gameStartTime;
     private String gameType;
     private long mapId;
-    private List<MatchParticipantTO> participants;
+    private MatchParticipantTO[] participants;
     private String platformId;
 
-    public List<MatchBannedChampionTO> getBannedChampions() {
+    public MatchBannedChampionTO[] getBannedChampions() {
         return bannedChampions;
     }
 
-    public void setBannedChampions(List<MatchBannedChampionTO> bannedChampions) {
+    public void setBannedChampions(MatchBannedChampionTO[] bannedChampions) {
         this.bannedChampions = bannedChampions;
     }
 
@@ -83,11 +81,11 @@ public class CurrentGameInfoTO extends BaseTO {
         this.mapId = mapId;
     }
 
-    public List<MatchParticipantTO> getParticipants() {
+    public MatchParticipantTO[] getParticipants() {
         return participants;
     }
 
-    public void setParticipants(List<MatchParticipantTO> participants) {
+    public void setParticipants(MatchParticipantTO[] participants) {
         this.participants = participants;
     }
 

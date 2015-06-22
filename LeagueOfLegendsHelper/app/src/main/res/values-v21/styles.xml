@@ -1,12 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat">
-        <!-- customize the color palette -->
-        <item name="colorPrimary">@color/material_indigo_500</item>
-        <item name="colorPrimaryDark">@color/material_indigo_700</item>
-        <item name="colorAccent">@color/material_blue_A200</item>
-    </style>
 
     <style name="AppTheme.ListItem">
         <item name="android:shadowDx">10dp</item>
@@ -17,6 +10,6 @@
         <item name="android:paddingLeft">@dimen/list_item_padding_horizontal</item>
         <item name="android:paddingRight">@dimen/list_item_padding_horizontal</item>
         <item name="android:paddingTop">@dimen/list_item_padding_vertical</item>
+        <item name="android:elevation">2dp</item>
     </style>
-
 </resources>
