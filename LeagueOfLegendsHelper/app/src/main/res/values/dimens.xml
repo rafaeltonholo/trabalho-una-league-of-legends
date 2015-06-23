@@ -7,4 +7,5 @@
     <dimen name="list_item_corner_radius">5dp</dimen>
     <dimen name="list_item_padding_horizontal">10dp</dimen>
     <dimen name="list_item_padding_vertical">5dp</dimen>
+    <dimen name="shadowXY">10dp</dimen>
 </resources>

@@ -10,8 +10,17 @@ import com.google.gson.JsonObject;
  * @since 10/06/2015
  */
 public class BaseTO implements Cloneable {
+    private int _id;
 
     public BaseTO() {
+    }
+
+    public int getId() {
+        return _id;
+    }
+
+    public void setId(int _id) {
+        this._id = _id;
     }
 
     private static Gson getGson() {
