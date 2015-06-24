@@ -1,7 +1,5 @@
 package br.com.trabalhouna.leagueoflegendshelper.to;
 
-import java.util.List;
-
 /**
  * Created by Rafael
  *
@@ -12,7 +10,7 @@ public class MatchParticipantTO extends BaseTO {
     private long championId;
     private MasteryTO[] masteries;
     private long profileIconId;
-    private RuneTO[] runes;
+    private MatchRuneTO[] runes;
     private long spell1Id;
     private long spell2Id;
     private long summonerId;
@@ -53,11 +51,11 @@ public class MatchParticipantTO extends BaseTO {
         this.profileIconId = profileIconId;
     }
 
-    public RuneTO[] getRunes() {
+    public MatchRuneTO[] getRunes() {
         return runes;
     }
 
-    public void setRunes(RuneTO[] runes) {
+    public void setRunes(MatchRuneTO[] runes) {
         this.runes = runes;
     }
 

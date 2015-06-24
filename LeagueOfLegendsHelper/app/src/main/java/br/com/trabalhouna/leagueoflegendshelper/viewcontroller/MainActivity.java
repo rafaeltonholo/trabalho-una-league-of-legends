@@ -147,7 +147,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                             }
 
                             @Override
-                            public void onFailure(final String error) {
+                            public void onFailure(final String error, Throwable e) {
                                 pd.dismiss();
 
                                 MainActivity.this.runOnUiThread(new Runnable() {

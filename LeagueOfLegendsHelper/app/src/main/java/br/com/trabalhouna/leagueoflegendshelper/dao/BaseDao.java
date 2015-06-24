@@ -25,7 +25,7 @@ public abstract class BaseDao<T extends BaseTO> implements DbOperations<T> {
     private final String UPDATE_TAG;
     private final String DELETE_TAG;
 
-    private Context mContext;
+    protected Context mContext;
     private Class<T> mClazz;
 
     public BaseDao(Context context, Class<T> mClazz) {

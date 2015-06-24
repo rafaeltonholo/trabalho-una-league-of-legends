@@ -1,11 +1,12 @@
 package br.com.trabalhouna.leagueoflegendshelper.to;
 
+
 /**
  * Created by Rafael
  *
  * @since 10/06/2015
  */
-public class RuneTO extends BaseTO {
+public class MatchRuneTO extends BaseTO {
     private long runeId;
     private int count;
 

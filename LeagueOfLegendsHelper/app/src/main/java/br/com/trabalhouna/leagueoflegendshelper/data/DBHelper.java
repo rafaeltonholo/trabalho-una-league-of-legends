@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import br.com.trabalhouna.leagueoflegendshelper.to.BaseTO;
+import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
+import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.ChampionTO;
+import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.RuneTO;
 
 /**
  * Created by Rafael
@@ -61,10 +64,47 @@ public final class DBHelper extends SQLiteOpenHelper {
     }
 
     private void createTables() {
+        String execQuery;
         String query = "CREATE TABLE IF NOT EXISTS %s (%s);";
 
         String queryColumns = "";
 
+        //region [ SummonerTO Table ]
+        queryColumns += "_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ";
+        queryColumns += "summonerId INTEGER NOT NULL, ";
+        queryColumns += "name TEXT NOT NULL, ";
+        queryColumns += "profileIconId INTEGER NOT NULL, ";
+        queryColumns += "summonerLevel INTEGER NOT NULL, ";
+        queryColumns += "revisionDate INTEGER NOT NULL";
+
+        execQuery = String.format(query, SummonerTO.class.getSimpleName(), queryColumns);
+
+        this.mDatabase.execSQL(execQuery);
+        //endregion [ SummonerTO Table ]
+
+        //region [ RuneTO Table ]
+        queryColumns = "_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ";
+        queryColumns += "runeId INTEGER NOT NULL, ";
+        queryColumns += "name TEXT NOT NULL, ";
+        queryColumns += "description TEXT, ";
+        queryColumns += "rune TEXT";
+
+        execQuery = String.format(query, RuneTO.class.getSimpleName(), queryColumns);
+
+        this.mDatabase.execSQL(execQuery);
+        //endregion [ RuneTO Table ]
+
+        //region [ ChampionTO Table ]
+        queryColumns = "_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ";
+        queryColumns += "championId INTEGER NOT NULL, ";
+        queryColumns += "key TEXT NOT NULL, ";
+        queryColumns += "name TEXT NOT NULL, ";
+        queryColumns += "title TEXT";
+
+        execQuery = String.format(query, ChampionTO.class.getSimpleName(), queryColumns);
+
+        this.mDatabase.execSQL(execQuery);
+        //endregion [ ChampionTO Table ]
 
     }
 }

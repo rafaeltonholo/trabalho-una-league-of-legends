@@ -70,7 +70,7 @@ public class MatchHistoryActivity extends ActionBarActivity {
                     }
 
                     @Override
-                    public void onFailure(String error) {
+                    public void onFailure(String error, Throwable e) {
                         pd.dismiss();
                     }
 

@@ -24,9 +24,13 @@ public final class ApiHelper {
     private static final String API_URL = "https://br.api.pvp.net/api/lol/{server}/v{version}/";
     private static final String API_URL_SUMMONER = "https://br.api.pvp.net/api/lol/{server}/v1.4/summoner/";
     private static final String API_URL_STATIC_DATA = "https://global.api.pvp.net/api/lol/static-data/{server}/v1.2/";
-    private static final String API_URL_CURRENT_GAME = "https://br.api.pvp.net/observer-mode/rest/consumer/getSpectatorGameInfo/{server}/";
+    private static final String API_URL_CURRENT_GAME = "https://br.api.pvp" +
+            ".net/observer-mode/rest/consumer/getSpectatorGameInfo/{server}/";
     private static final String API_URL_MATCH_HISTORY = "https://br.api.pvp.net/api/lol/{server}/v2.2/matchhistory/";
-
+    private static final String API_URL_STATIC_RESOURCE_CHAMPION = "https://global.api.pvp" +
+            ".net/api/lol/static-data/{server}/v1.2/champion";
+    private static final String API_URL_STATIC_RESOURCE_RUNE = "https://global.api.pvp" +
+            ".net/api/lol/static-data/{server}/v1.2/rune";
 
     public static String getApiUrlMatchHistory(Server server, String summonerId) {
         return addApiKey((API_URL_MATCH_HISTORY + summonerId).replace(SERVER_ADDRESS_TOKEN, server.getValue()));
@@ -55,6 +59,10 @@ public final class ApiHelper {
     public static String getApiUrlCurrentGame(Server server, long summonerId) {
         return addApiKey(API_URL_CURRENT_GAME.replace(SERVER_ADDRESS_TOKEN, server.getValue())
                 .concat(Long.toString(summonerId)));
+    }
+
+    public static String getApiUrlStaticResourceRune(Server server) {
+        return addApiKey(API_URL_STATIC_RESOURCE_RUNE.replace(SERVER_ADDRESS_TOKEN, server.getValue()));
     }
 
     public enum Server {
