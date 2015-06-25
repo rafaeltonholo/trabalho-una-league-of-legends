@@ -44,7 +44,7 @@ public abstract class BaseDao<T extends BaseTO> implements DbOperations<T> {
 
     @Override
     public final int count(DbParam... filters) {
-        String query = "SELECT COUNT(1) FROM ".concat(this.mClazz.getName());
+        String query = "SELECT COUNT(1) FROM ".concat(this.mClazz.getSimpleName());
         String whereClause = "";
         String[] whereValues;
 
@@ -190,6 +190,11 @@ public abstract class BaseDao<T extends BaseTO> implements DbOperations<T> {
         } catch (SQLException e) {
             Log.e(INSERT_TAG, e.getMessage(), e);
             throw e;
+        } catch (Exception e) {
+            Log.e(INSERT_TAG, "[ Unexpected Exception ]" + e.getMessage(), e);
+            throw e;
+        } finally {
+            ContentManager.getInstance(mContext).localDatabase.closeConnection();
         }
         return result;
     }
@@ -209,6 +214,11 @@ public abstract class BaseDao<T extends BaseTO> implements DbOperations<T> {
         } catch (SQLException e) {
             Log.e(UPDATE_TAG, e.getMessage(), e);
             throw e;
+        } catch (Exception e) {
+            Log.e(INSERT_TAG, "[ Unexpected Exception ]" + e.getMessage(), e);
+            throw e;
+        } finally {
+            ContentManager.getInstance(mContext).localDatabase.closeConnection();
         }
 
         return result;
@@ -224,6 +234,9 @@ public abstract class BaseDao<T extends BaseTO> implements DbOperations<T> {
                     whereClause, whereArgs);
         } catch (SQLException e) {
             Log.e(DELETE_TAG, e.getMessage() + "\n" + e.getCause());
+            throw e;
+        } catch (Exception e) {
+            Log.e(INSERT_TAG, "[ Unexpected Exception ]" + e.getMessage(), e);
             throw e;
         } finally {
             ContentManager.getInstance(mContext).localDatabase.closeConnection();

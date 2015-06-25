@@ -101,7 +101,7 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
             url = uri.toURL();
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod(params[1]);
-            http.setRequestProperty("Content-Type", "text/plain; charset=UTF-8");
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             int responseCode = http.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 InputStream i = new BufferedInputStream(http.getInputStream());

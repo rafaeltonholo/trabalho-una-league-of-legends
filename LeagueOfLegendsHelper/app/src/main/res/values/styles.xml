@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/material_blue_A200</item>
     </style>
 
+    <style name="AppTheme.Fullscreen" parent="Theme.AppCompat.NoActionBar"/>
+
     <style name="AppTheme.ListItem">
         <item name="android:shadowDx">@dimen/shadowXY</item>
         <item name="android:shadowDy">@dimen/shadowXY</item>

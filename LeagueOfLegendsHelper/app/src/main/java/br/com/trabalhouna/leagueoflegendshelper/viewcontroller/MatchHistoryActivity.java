@@ -27,8 +27,8 @@ public class MatchHistoryActivity extends ActionBarActivity {
 
         matchHistory = (ListView) findViewById(R.id.listMatchHistory);
 
-        String summonerId = ContentManager.getInstance(MatchHistoryActivity.this)
-                .sharedPrefsRead(Constants.PREF_USER_ID, "");
+        String summonerId = ContentManager.getInstance(MatchHistoryActivity.this).sharedPrefsRead(Constants
+                .PREF_USER_ID, "");
 
         if (!summonerId.equals(""))
             updateMatchHistory(summonerId);
@@ -42,8 +42,6 @@ public class MatchHistoryActivity extends ActionBarActivity {
         pd = new ProgressDialog(this);
         pd.setMessage(getString(R.string.loadingMatchHistory));
 
-
-        //TODO: PEGAR SUMMONER ID SALVO
         playerHistoryTask.callPlayerHistoryMatches(this, summonerId,
                 new BaseTask.OnResponseListener<PlayerHistoryTO>() {
 

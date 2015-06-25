@@ -62,7 +62,7 @@ public final class ApiHelper {
     }
 
     public static String getApiUrlStaticResourceRune(Server server) {
-        return addApiKey(API_URL_STATIC_RESOURCE_RUNE.replace(SERVER_ADDRESS_TOKEN, server.getValue()));
+        return addApiKey(API_URL_STATIC_RESOURCE_CHAMPION.replace(SERVER_ADDRESS_TOKEN, server.getValue()));
     }
 
     public enum Server {

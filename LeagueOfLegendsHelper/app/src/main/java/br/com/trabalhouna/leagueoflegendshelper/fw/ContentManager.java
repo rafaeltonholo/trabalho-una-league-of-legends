@@ -7,7 +7,7 @@ import android.util.Log;
 
 import java.util.Map;
 
-import br.com.trabalhouna.leagueoflegendshelper.data.DBHelper;
+import br.com.trabalhouna.leagueoflegendshelper.data.DbHelper;
 
 /**
  * Gerenciador de conteudo que gerenciará o que será armazenado no dispositivo.
@@ -20,12 +20,12 @@ public final class ContentManager {
     private static ContentManager sInstance;
     private SharedPreferences mSharedPrefs;
     private SharedPreferences mDefaultSharedPrefs;
-    public DBHelper localDatabase;
+    public DbHelper localDatabase;
 
     public ContentManager(Context context) {
         this.mSharedPrefs = context.getSharedPreferences(Constants.SHARED_PREFS_NAME, Context.MODE_PRIVATE);
         this.mDefaultSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        this.localDatabase = DBHelper.getInstance(context);
+        this.localDatabase = DbHelper.getInstance(context);
     }
 
     public static ContentManager getInstance(Context context) {

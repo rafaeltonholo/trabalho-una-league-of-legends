@@ -1,18 +1,21 @@
 package br.com.trabalhouna.leagueoflegendshelper.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.com.trabalhouna.leagueoflegendshelper.R;
-import br.com.trabalhouna.leagueoflegendshelper.to.MatchParticipantIdentityTO;
+import br.com.trabalhouna.leagueoflegendshelper.dao.ChampionDao;
+import br.com.trabalhouna.leagueoflegendshelper.fw.Util;
 import br.com.trabalhouna.leagueoflegendshelper.to.MatchParticipantTO;
 import br.com.trabalhouna.leagueoflegendshelper.to.MatchSummaryTO;
 import br.com.trabalhouna.leagueoflegendshelper.to.PlayerHistoryTO;
-import br.com.trabalhouna.leagueoflegendshelper.to.PlayerTO;
+import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.ChampionTO;
 
 /**
  * Created by Kelvin on 11/06/2015.
@@ -45,41 +48,66 @@ public class PlayerHistoryAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         MatchSummaryTO match = this.playerHistory.getMatches()[position];
-        MatchParticipantTO participantTO = match.getParticipants()[0];//Sempre retorna somente um item
+        final MatchParticipantTO participantTO = match.getParticipants()[0];//Sempre retorna somente um item
 
-        LayoutInflater inflater = (LayoutInflater)
-                context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        if (convertView == null) {
+            // TODO Trocar para ViewHolder Pattern
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_match_history, null);
+        }
 
-        View view = inflater.inflate(R.layout.item_match_history, null);
+        final ImageView imgCampeaoIcon = (ImageView) convertView.findViewById(R.id.imgCampeaoIcon);
+        final TextView txtCampeaoNome = (TextView) convertView.findViewById(R.id.txtCampeaoNome);
+
+        new AsyncTask<Object, Void, ChampionTO>() {
+            final ChampionDao championDao = new ChampionDao(context);
+
+            @Override
+            protected ChampionTO doInBackground(Object... params) {
+                ChampionTO champ = championDao.getChampionInfo(participantTO.getChampionId());
+                return champ;
+            }
+
+            @Override
+            protected void onPostExecute(ChampionTO champ) {
+                super.onPostExecute(champ);
+                if (champ != null) {
+                    imgCampeaoIcon.setImageDrawable(Util.getImageFromAssets(context, "champions_icons/" + champ.getKey()
+                            + ".png"));
+
+                    txtCampeaoNome.setText(champ.getName());
+                }
+            }
+        }.execute();
+
 
         //Player Kills
-        TextView txtKills = (TextView) view.findViewById(R.id.kills);
+        TextView txtKills = (TextView) convertView.findViewById(R.id.kills);
         txtKills.setText(participantTO.getStats().getKillsString());
 
         //Player Deaths
-        TextView txtDeaths = (TextView)view.findViewById(R.id.deaths);
+        TextView txtDeaths = (TextView) convertView.findViewById(R.id.deaths);
         txtDeaths.setText(participantTO.getStats().getDeathsString());
 
         //Player Assists
-        TextView txtAssists = (TextView)view.findViewById(R.id.assists);
+        TextView txtAssists = (TextView) convertView.findViewById(R.id.assists);
         txtAssists.setText(participantTO.getStats().getAssistsString());
 
         //Match Creation
-        TextView txtMatchCreation = (TextView) view.findViewById(R.id.matchCreation);
+        TextView txtMatchCreation = (TextView) convertView.findViewById(R.id.matchCreation);
         txtMatchCreation.setText(match.getMatchCreationDateString());
 
         //Match Mode
-        TextView txtMatchMode = (TextView) view.findViewById(R.id.matchMode);
+        TextView txtMatchMode = (TextView) convertView.findViewById(R.id.matchMode);
         txtMatchMode.setText(match.getMatchMode());
 
         //Match Duration
-        TextView txtMatchDuration = (TextView) view.findViewById(R.id.matchDuration);
+        TextView txtMatchDuration = (TextView) convertView.findViewById(R.id.matchDuration);
         txtMatchDuration.setText(match.getMatchDurationInMinutes());
 
         //Match Region
-        TextView txtMatchRegion = (TextView) view.findViewById(R.id.matchRegion);
+        TextView txtMatchRegion = (TextView) convertView.findViewById(R.id.matchRegion);
         txtMatchRegion.setText(String.valueOf(match.getRegion()));
 
-        return view;
+        return convertView;
     }
 }

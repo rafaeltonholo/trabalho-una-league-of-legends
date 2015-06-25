@@ -1,17 +1,20 @@
 package br.com.trabalhouna.leagueoflegendshelper.dao;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.net.HttpURLConnection;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import br.com.trabalhouna.leagueoflegendshelper.R;
+import br.com.trabalhouna.leagueoflegendshelper.interfaces.OnAsyncCallbackListener;
 import br.com.trabalhouna.leagueoflegendshelper.task.BaseTask;
 import br.com.trabalhouna.leagueoflegendshelper.task.RuneTask;
 import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.MetaDataTO;
@@ -55,8 +58,7 @@ public class RuneDao extends BaseDao<RuneTO> {
         return values;
     }
 
-    // TODO pensar em uma forma de retorno para activity de splash
-    public void populateDb() {
+    public void populateDb(@NonNull final OnAsyncCallbackListener listener) {
         RuneTask task = new RuneTask();
         task.call(this.mContext, new BaseTask.OnResponseListener<StaticResource<RuneTO>>() {
             @Override
@@ -113,12 +115,19 @@ public class RuneDao extends BaseDao<RuneTO> {
 
             @Override
             public void onSucess(StaticResource<RuneTO> object) {
-                Map.Entry<String, RuneTO> entry;
-                if(object.getData().entrySet().size() <= 0) return;
+                int count = object.getData().entrySet().size();
 
-                while ((entry = object.getData().entrySet().iterator().next()) != null) {
+                if(object.getData().entrySet().size() <= 0) return;
+                if (RuneDao.this.count() == count) {
+                    listener.callback();
+                    return;
+                }
+
+                for (Map.Entry<String, RuneTO> entry : object.getData().entrySet()) {
                     RuneDao.this.insert(entry.getValue());
                 }
+
+                listener.callback();
             }
 
             @Override

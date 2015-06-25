@@ -1,14 +1,11 @@
 package br.com.trabalhouna.leagueoflegendshelper.data;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import br.com.trabalhouna.leagueoflegendshelper.to.BaseTO;
 import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
 import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.ChampionTO;
 import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.RuneTO;
@@ -18,21 +15,21 @@ import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.RuneTO;
  *
  * @since 20/06/2015
  */
-public final class DBHelper extends SQLiteOpenHelper {
-    private static DBHelper sInstace;
+public final class DbHelper extends SQLiteOpenHelper {
+    private static DbHelper sInstace;
     private static final int DB_VERSION = 1;
-    private static final String DB_NAME = "";
+    private static final String DB_NAME = "LOLHelper.db3";
     private AtomicInteger mConnections;
     private SQLiteDatabase mDatabase;
 
-    private DBHelper(Context context) {
+    private DbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         this.mConnections = new AtomicInteger();
     }
 
-    public static DBHelper getInstance(Context context) {
-        synchronized (DBHelper.class) {
-            if(sInstace == null) sInstace = new DBHelper(context);
+    public static DbHelper getInstance(Context context) {
+        synchronized (DbHelper.class) {
+            if (sInstace == null) sInstace = new DbHelper(context);
 
             return sInstace;
         }
@@ -40,7 +37,7 @@ public final class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        createTables();
+        createTables(db);
     }
 
     @Override
@@ -49,21 +46,21 @@ public final class DBHelper extends SQLiteOpenHelper {
     }
 
     public SQLiteDatabase openConnection() {
-        if(mConnections.getAndIncrement() > 0) return this.mDatabase;
+        if (mConnections.getAndIncrement() > 0) return this.mDatabase;
 
-        this.mDatabase = this.getWritableDatabase();
+        this.mDatabase = super.getWritableDatabase();
 
         return this.mDatabase;
     }
 
     public void closeConnection() {
-        if(this.mConnections.decrementAndGet() >= 0) return;
+        if (this.mConnections.decrementAndGet() > 0) return;
 
         this.mDatabase.close();
         this.mDatabase = null;
     }
 
-    private void createTables() {
+    private void createTables(SQLiteDatabase db) {
         String execQuery;
         String query = "CREATE TABLE IF NOT EXISTS %s (%s);";
 
@@ -79,7 +76,7 @@ public final class DBHelper extends SQLiteOpenHelper {
 
         execQuery = String.format(query, SummonerTO.class.getSimpleName(), queryColumns);
 
-        this.mDatabase.execSQL(execQuery);
+        db.execSQL(execQuery);
         //endregion [ SummonerTO Table ]
 
         //region [ RuneTO Table ]
@@ -91,19 +88,19 @@ public final class DBHelper extends SQLiteOpenHelper {
 
         execQuery = String.format(query, RuneTO.class.getSimpleName(), queryColumns);
 
-        this.mDatabase.execSQL(execQuery);
+        db.execSQL(execQuery);
         //endregion [ RuneTO Table ]
 
         //region [ ChampionTO Table ]
         queryColumns = "_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ";
         queryColumns += "championId INTEGER NOT NULL, ";
-        queryColumns += "key TEXT NOT NULL, ";
+        queryColumns += "key TEXT, ";
         queryColumns += "name TEXT NOT NULL, ";
         queryColumns += "title TEXT";
 
         execQuery = String.format(query, ChampionTO.class.getSimpleName(), queryColumns);
 
-        this.mDatabase.execSQL(execQuery);
+        db.execSQL(execQuery);
         //endregion [ ChampionTO Table ]
 
     }

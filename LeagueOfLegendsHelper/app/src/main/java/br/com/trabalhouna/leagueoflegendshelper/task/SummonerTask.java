@@ -1,14 +1,12 @@
 package br.com.trabalhouna.leagueoflegendshelper.task;
 
 import android.content.Context;
-import android.database.Cursor;
 
 import com.google.gson.reflect.TypeToken;
 
 import java.util.HashMap;
 
 import br.com.trabalhouna.leagueoflegendshelper.R;
-import br.com.trabalhouna.leagueoflegendshelper.data.DBHelper;
 import br.com.trabalhouna.leagueoflegendshelper.fw.ApiHelper;
 import br.com.trabalhouna.leagueoflegendshelper.fw.ContentManager;
 import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
