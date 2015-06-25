@@ -7,4 +7,10 @@
     <color name="button_normal">@color/material_blue_A200</color>
     <color name="button_shadow">@color/material_blue_A700</color>
     <color name="list_item_background">#FFFFFFFF</color>
+    <color name="list_item_line">#333333</color>
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+    <color name="kills">#FF00A30C</color>
+    <color name="deaths">#FFFF010F</color>
+    <color name="assists">#FFFF9E01</color>
 </resources>

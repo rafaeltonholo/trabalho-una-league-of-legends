@@ -1,23 +1,26 @@
 package br.com.trabalhouna.leagueoflegendshelper.to;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Rafael
  *
  * @since 10/06/2015
  */
 public class SummonerTO extends BaseTO {
-    private long id;
+    @SerializedName("id")
+    private long summonerId;
     private String name;
     private int profileIconId;
     private int summonerLevel;
     private long revisionDate;
 
-    public long getId() {
-        return id;
+    public long getSummonerId() {
+        return summonerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setSummonerId(long id) {
+        this.summonerId = id;
     }
 
     public String getName() {
@@ -54,6 +57,6 @@ public class SummonerTO extends BaseTO {
 
     @Override
     public String toString() {
-        return String.format("SummonerName: %s, Level: %d, ID: %d", this.name, this.summonerLevel, this.id);
+        return String.format("SummonerName: %s, Level: %d, ID: %d", this.name, this.summonerLevel, this.summonerId);
     }
 }

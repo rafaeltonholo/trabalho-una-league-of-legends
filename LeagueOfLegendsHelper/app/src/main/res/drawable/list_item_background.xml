@@ -2,14 +2,12 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:top="@dimen/list_item_padding_vertical"
-        android:bottom="@dimen/list_item_padding_vertical"
         android:left="@dimen/list_item_padding_horizontal"
         android:right="@dimen/list_item_padding_horizontal"
+        android:bottom="@dimen/list_item_padding_vertical"
         >
         <shape android:shape="rectangle">
-            <corners android:radius="@dimen/list_item_corner_radius" />
             <solid android:color="@color/list_item_background" />
         </shape>
-
     </item>
 </layer-list>

@@ -5,6 +5,7 @@
     <dimen name="button_corner_radius">3dp</dimen>
     <dimen name="button_padding_shadow_bottom">2dp</dimen>
     <dimen name="list_item_corner_radius">5dp</dimen>
-    <dimen name="list_item_padding_horizontal">5dp</dimen>
+    <dimen name="list_item_padding_horizontal">10dp</dimen>
     <dimen name="list_item_padding_vertical">5dp</dimen>
+    <dimen name="shadowXY">10dp</dimen>
 </resources>

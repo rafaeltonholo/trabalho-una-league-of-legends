@@ -1,6 +1,7 @@
 package br.com.trabalhouna.leagueoflegendshelper.task;
 
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
@@ -43,9 +44,10 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
         /**
          * Caso haja algum erro por exceção, deverá ser tratado a forma de exibição aqui
          *
-         * @param error - mensagem da exceção
+         * @param error mensagem da exceção
+         * @param e exceção lançada
          */
-        void onFailure(String error);
+        void onFailure(String error, @Nullable Throwable e);
 
         /**
          * Método que será executado antes da chamada assíncrona
@@ -99,7 +101,7 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
             url = uri.toURL();
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod(params[1]);
-            http.setRequestProperty("Content-Type", "text/plain; charset=UTF-8");
+            http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             int responseCode = http.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 InputStream i = new BufferedInputStream(http.getInputStream());
@@ -114,7 +116,7 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
             }
         } catch (Exception e) {
             model = null;
-            if (this.mResponseListner != null) this.mResponseListner.onFailure(e.getMessage());
+            if (this.mResponseListner != null) this.mResponseListner.onFailure(e.getMessage(), e);
 
             if (this.mClazz != null) Log.e(mClazz.getName(), e.getMessage(), e);
             if (this.mTypeToken != null)

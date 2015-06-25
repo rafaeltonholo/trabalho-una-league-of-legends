@@ -130,7 +130,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
                                     boolean success = ContentManager.getInstance(MainActivity.this)
                                             .sharedPrefsWrite(Constants.PREF_USER_ID,
-                                                    Long.toString(summoner.getId()));
+                                                    Long.toString(summoner.getSummonerId()));
 
                                     if (success) {
                                         MainActivity.this.runOnUiThread(new Runnable() {
@@ -147,7 +147,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                             }
 
                             @Override
-                            public void onFailure(final String error) {
+                            public void onFailure(final String error, Throwable e) {
                                 pd.dismiss();
 
                                 MainActivity.this.runOnUiThread(new Runnable() {
