@@ -57,11 +57,15 @@ public final class ApiHelper {
      * @return Url de current game
      */
     public static String getApiUrlCurrentGame(Server server, long summonerId) {
-        return addApiKey(API_URL_CURRENT_GAME.replace(SERVER_ADDRESS_TOKEN, server.getValue())
-                .concat(Long.toString(summonerId)));
+        return addApiKey(API_URL_CURRENT_GAME.replace(SERVER_ADDRESS_TOKEN, server.getValue().toUpperCase().concat
+                ("1")).concat(Long.toString(summonerId)));
     }
 
     public static String getApiUrlStaticResourceRune(Server server) {
+        return addApiKey(API_URL_STATIC_RESOURCE_RUNE.replace(SERVER_ADDRESS_TOKEN, server.getValue()));
+    }
+
+    public static String getApiUrlStaticResourceChampion(Server server) {
         return addApiKey(API_URL_STATIC_RESOURCE_CHAMPION.replace(SERVER_ADDRESS_TOKEN, server.getValue()));
     }
 

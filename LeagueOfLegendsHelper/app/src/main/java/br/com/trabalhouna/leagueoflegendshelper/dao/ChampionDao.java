@@ -113,7 +113,12 @@ public class ChampionDao extends BaseDao<ChampionTO> {
             }
 
             @Override
-            public void onSucess(StaticResource<ChampionTO> object) {
+            public void onSuccess(StaticResource<ChampionTO> object) {
+                if(object == null || object.getData() == null) {
+                    listener.callback();
+                    return;
+                }
+
                 int count = object.getData().entrySet().size();
 
                 if(object.getData().entrySet().size() <= 0) return;

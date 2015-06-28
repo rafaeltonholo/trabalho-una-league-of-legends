@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/imgCampeaoIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
@@ -29,6 +29,7 @@
             android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/txtCampeaoQtdeJogos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +57,7 @@
             android:textAppearance="?android:attr/textAppearanceLargeInverse" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/txtInvocadorElo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,6 +66,7 @@
             android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/txtInvocadorKillRatio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

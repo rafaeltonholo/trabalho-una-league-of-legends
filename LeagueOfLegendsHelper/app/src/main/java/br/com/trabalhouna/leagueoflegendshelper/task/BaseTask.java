@@ -39,7 +39,7 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
          *
          * @param object - Objeto parseado do JSON de retorno
          */
-        void onSucess(T object);
+        void onSuccess(T object);
 
         /**
          * Caso haja algum erro por exceção, deverá ser tratado a forma de exibição aqui
@@ -93,14 +93,18 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
 
     @Override
     protected T doInBackground(String... params) {
+        return executeTask(params[0], params[1]);
+    }
+
+    protected T executeTask(String urlString, String requestMethod) {
         T model;
         try {
-            URL url = new URL(params[0]);
+            URL url = new URL(urlString);
             URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
 
             url = uri.toURL();
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
-            http.setRequestMethod(params[1]);
+            http.setRequestMethod(requestMethod);
             http.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             int responseCode = http.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -123,7 +127,7 @@ public abstract class BaseTask<T> extends AsyncTask<String, Void, T> {
                 Log.e(this.mTypeToken.getClass().getName(), e.getMessage(), e);
         }
 
-        if (this.mResponseListner != null) this.mResponseListner.onSucess(model);
+        if (this.mResponseListner != null) this.mResponseListner.onSuccess(model);
 
         return model;
     }

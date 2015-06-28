@@ -25,6 +25,6 @@ public class ChampionTask extends BaseTask<StaticResource<ChampionTO>> {
         ApiHelper.Server server = ApiHelper.Server.parse(ContentManager.getInstance(context)
                 .defaultSharedPrefsRead(context.getString(R.string.pref_server), "BR"));
 
-        this.call(listener, ApiHelper.getApiUrlStaticResourceRune(server), MethodType.GET);
+        this.call(listener, ApiHelper.getApiUrlStaticResourceChampion(server), MethodType.GET);
     }
 }

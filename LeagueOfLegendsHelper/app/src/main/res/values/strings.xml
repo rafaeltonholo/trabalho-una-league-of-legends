@@ -29,4 +29,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="action_current_match">Pesquisar jogador em Partida</string>
+    <string name="matches_not_found">Nenhuma partida encontrada :(</string>
+    <string name="loadingCurrentMatch" formatted="false">Carregando partida de %s</string>
+    <string name="actual_match_vs">Contra</string>
 </resources>

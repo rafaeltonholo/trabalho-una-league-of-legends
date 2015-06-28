@@ -21,7 +21,7 @@ public class SummonerDao extends BaseDao<SummonerTO> {
         if (!cursor.moveToFirst()) return null;
 
         SummonerTO to = new SummonerTO();
-
+        to.setId(cursor.getInt(cursor.getColumnIndex("_id")));
         to.setSummonerId(cursor.getLong(cursor.getColumnIndex("summonerId")));
         to.setName(cursor.getString(cursor.getColumnIndex("name")));
         to.setProfileIconId(cursor.getInt(cursor.getColumnIndex("profileIconId")));
