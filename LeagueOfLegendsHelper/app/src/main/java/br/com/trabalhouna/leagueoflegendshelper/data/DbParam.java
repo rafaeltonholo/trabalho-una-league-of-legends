@@ -27,6 +27,7 @@ public class DbParam {
 
     /**
      * Seta o valor do parametro. <br>
+     * Se a Operação for IN, definir os valores separados por virgula.<br>
      * <b>Fique atento com o DbType. DbType default = TEXT</b>.
      *
      * @param value Valor do parametro
@@ -72,6 +73,8 @@ public class DbParam {
                 return " >= ";
             case LIKE:
                 return " LIKE ";
+            case IN:
+                return " IN (";
             default:
                 return null;
         }
@@ -90,7 +93,7 @@ public class DbParam {
                 value = this.mValue.toString();
         }
 
-        if(mOperation == Operation.LIKE) {
+        if (mOperation == Operation.LIKE) {
             switch (this.mLikeKind) {
                 case END:
                     value += "%";
@@ -112,7 +115,11 @@ public class DbParam {
         String operator = getOperator();
         if (operator == null) return "";
 
-        return this.mColumn.concat(" ").concat(operator).concat(" ?");
+        String value = this.mColumn.concat(" ").concat(operator).concat(" ?");
+        if (this.mOperation == Operation.IN)
+            value += ")";
+
+        return value;
     }
 
     public enum Operation {
@@ -122,7 +129,8 @@ public class DbParam {
         MORE_THAN,
         LESS_OR_EQUALS,
         MORE_OR_EQUALS,
-        LIKE
+        LIKE,
+        IN
     }
 
     public enum LikeKind {

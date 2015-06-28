@@ -14,9 +14,13 @@ import android.widget.Toast;
 
 import java.net.HttpURLConnection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.com.trabalhouna.leagueoflegendshelper.R;
+import br.com.trabalhouna.leagueoflegendshelper.dao.SummonerDao;
+import br.com.trabalhouna.leagueoflegendshelper.data.DbParam;
+import br.com.trabalhouna.leagueoflegendshelper.data.DbType;
 import br.com.trabalhouna.leagueoflegendshelper.fw.Constants;
 import br.com.trabalhouna.leagueoflegendshelper.fw.ContentManager;
 import br.com.trabalhouna.leagueoflegendshelper.task.BaseTask;
@@ -117,11 +121,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                         });
                                         break;
                                 }
+                                pd.dismiss();
                             }
 
                             @Override
-                            public void onSucess(final HashMap<String, SummonerTO> object) {
+                            public void onSuccess(final HashMap<String, SummonerTO> object) {
                                 pd.dismiss();
+                                if(object == null) return;
+
                                 Map.Entry<String, SummonerTO> entry = object.entrySet().iterator()
                                         .next();
 
@@ -133,6 +140,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                                                     Long.toString(summoner.getSummonerId()));
 
                                     if (success) {
+                                        SummonerDao summonerDao = new SummonerDao(MainActivity.this);
+                                        List<SummonerTO> summoners = summonerDao.read(new DbParam().setColumn
+                                                ("summonerId").setValue(summoner.getSummonerId()).setDbType(DbType
+                                                .INTEGER));
+
+                                        if(!summoners.isEmpty()) {
+                                            summoner.setId(summoners.get(0).getId());
+                                            summonerDao.update(summoner);
+                                        }
+                                        else summonerDao.insert(summoner);
+
                                         MainActivity.this.runOnUiThread(new Runnable() {
                                             @Override
                                             public void run() {

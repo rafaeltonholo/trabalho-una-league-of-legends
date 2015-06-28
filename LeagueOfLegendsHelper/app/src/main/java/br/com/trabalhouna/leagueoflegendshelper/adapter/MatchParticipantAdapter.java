@@ -1,6 +1,7 @@
 package br.com.trabalhouna.leagueoflegendshelper.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,11 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.trabalhouna.leagueoflegendshelper.R;
+import br.com.trabalhouna.leagueoflegendshelper.dao.ChampionDao;
+import br.com.trabalhouna.leagueoflegendshelper.fw.Util;
 import br.com.trabalhouna.leagueoflegendshelper.to.CurrentGameInfoTO;
 import br.com.trabalhouna.leagueoflegendshelper.to.MatchParticipantTO;
+import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.ChampionTO;
 
 /**
  * Created by Rafael
@@ -22,10 +26,12 @@ import br.com.trabalhouna.leagueoflegendshelper.to.MatchParticipantTO;
 public class MatchParticipantAdapter extends BaseAdapter {
     private Context mContext;
     private List<MatchParticipantTO> mList;
+    private ChampionDao mChapionDao;
 
     public MatchParticipantAdapter(Context context, List<MatchParticipantTO> list) {
         this.mContext = context;
         this.mList = list;
+        this.mChapionDao = new ChampionDao(context);
     }
 
     @Override
@@ -45,7 +51,7 @@ public class MatchParticipantAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
 
         if(convertView == null) {
             convertView = LayoutInflater.from(this.mContext).inflate(R.layout.actual_match_list_item, null);
@@ -65,16 +71,31 @@ public class MatchParticipantAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        MatchParticipantTO participant = getItem(position);
-        //info.getP
-//        viewHolder.imgCampeaoIcon
-        viewHolder.txtCampeaoNome.setText(Long.toString(participant.getChampionId()));
-//        viewHolder.txtCampeaoQtdeJogos
+        final MatchParticipantTO participant = getItem(position);
+
+        new AsyncTask<Object, Void, ChampionTO>() {
+            final ChampionDao championDao = new ChampionDao(mContext);
+
+            @Override
+            protected ChampionTO doInBackground(Object... params) {
+                ChampionTO champ = championDao.getChampionInfo(participant.getChampionId());
+                return champ;
+            }
+
+            @Override
+            protected void onPostExecute(ChampionTO champ) {
+                super.onPostExecute(champ);
+                if (champ != null) {
+                    viewHolder.imgCampeaoIcon.setImageDrawable(Util.getImageFromAssets(mContext, "champions_icons/" +
+                            champ.getKey()
+                            + ".png"));
+
+                    viewHolder.txtCampeaoNome.setText(champ.getName());
+                }
+            }
+        }.execute();
+
         viewHolder.txtInvocadorNome.setText(participant.getSummonerName());
-//        viewHolder.txtInvocadorElo
-//        viewHolder.txtInvocadorKillRatio
-//        viewHolder.txtInvocadorMaestria
-//        viewHolder.txtInvocadorRunas
 
         return convertView;
     }

@@ -46,7 +46,10 @@ public class SplashScreenActivity extends ActionBarActivity {
         mTxtLoading.setText(String.format("Carregando %d/%d", mLoaded, mTotalLoad));
         if(mLoaded == mTotalLoad) {
             Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
+            finish();
         }
     }
 }

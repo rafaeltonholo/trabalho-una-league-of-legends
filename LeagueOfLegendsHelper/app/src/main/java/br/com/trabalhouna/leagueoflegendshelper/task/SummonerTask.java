@@ -30,7 +30,13 @@ public class SummonerTask extends BaseTask<HashMap<String, SummonerTO>> {
 
         this.call(responseListner,
                 ApiHelper.getApiUrlSummoner(server, "by-name/", summonerName), MethodType.GET);
+    }
 
+    public HashMap<String, SummonerTO> callSync(Context context, String summonerName) {
+        ApiHelper.Server server = ApiHelper.Server.parse(ContentManager.getInstance(context)
+                .defaultSharedPrefsRead(context.getString(R.string.pref_server), "BR"));
+
+        return this.executeTask(ApiHelper.getApiUrlSummoner(server, "by-name/", summonerName), MethodType.GET.toString());
     }
 
 }
