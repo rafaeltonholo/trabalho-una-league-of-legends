@@ -1,14 +1,40 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="br.com.trabalhouna.leagueoflegendshelper.viewcontroller.CurrentMatchActivity">
 
-    <ListView
-        android:id="@+id/lstCurrentMatch"
-        android:divider="@android:color/transparent"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:smoothScrollbar="true" />
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ListView
+                android:id="@+id/lstCurrentMatchTeamOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@android:color/transparent"
+                android:smoothScrollbar="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/actual_match_vs"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <ListView
+                android:id="@+id/lstCurrentMatchTeamTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@android:color/transparent"
+                android:smoothScrollbar="true"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

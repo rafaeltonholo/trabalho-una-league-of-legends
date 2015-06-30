@@ -33,4 +33,5 @@
     <string name="matches_not_found">Nenhuma partida encontrada :(</string>
     <string name="loadingCurrentMatch" formatted="false">Carregando partida de %s</string>
     <string name="actual_match_vs">Contra</string>
+    <string name="riot">Este aplicatio não pertence e nem foi criado pela RIOT.</string>
 </resources>

@@ -9,6 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.trabalhouna.leagueoflegendshelper.data.DbHelper;
 import br.com.trabalhouna.leagueoflegendshelper.data.DbOperations;
 import br.com.trabalhouna.leagueoflegendshelper.data.DbParam;
 import br.com.trabalhouna.leagueoflegendshelper.fw.ContentManager;
@@ -139,8 +140,9 @@ public abstract class BaseDao<T extends BaseTO> implements DbOperations<T> {
                 whereValues = null;
             }
 
-
-            cursor = ContentManager.getInstance(mContext).localDatabase.openConnection().rawQuery(query, whereValues);
+            ContentManager contentManager = ContentManager.getInstance(mContext);
+            DbHelper dbInstance = contentManager.localDatabase;
+            cursor = dbInstance.openConnection().rawQuery(query, whereValues);
 
             while (cursor.moveToNext()) toList.add(this.bindObject(cursor));
         } catch (SQLException ex) {

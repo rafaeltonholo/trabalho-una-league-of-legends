@@ -24,6 +24,7 @@ import br.com.trabalhouna.leagueoflegendshelper.data.DbParam;
 import br.com.trabalhouna.leagueoflegendshelper.data.DbType;
 import br.com.trabalhouna.leagueoflegendshelper.fw.Constants;
 import br.com.trabalhouna.leagueoflegendshelper.fw.ContentManager;
+import br.com.trabalhouna.leagueoflegendshelper.fw.Util;
 import br.com.trabalhouna.leagueoflegendshelper.task.BaseTask;
 import br.com.trabalhouna.leagueoflegendshelper.task.CurrentGameTask;
 import br.com.trabalhouna.leagueoflegendshelper.task.SummonerTask;
@@ -32,13 +33,15 @@ import br.com.trabalhouna.leagueoflegendshelper.to.MatchParticipantTO;
 import br.com.trabalhouna.leagueoflegendshelper.to.SummonerTO;
 
 public class CurrentMatchActivity extends ActionBarActivity {
-    private ListView mLstCurrentMatch;
+    private ListView mLstCurrentMatchTeamOne;
+    private ListView mLstCurrentMatchTeamTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_match);
-        mLstCurrentMatch = (ListView) findViewById(R.id.lstCurrentMatch);
+        mLstCurrentMatchTeamOne = (ListView) findViewById(R.id.lstCurrentMatchTeamOne);
+        mLstCurrentMatchTeamTwo = (ListView) findViewById(R.id.lstCurrentMatchTeamTwo);
         String summonerId = ContentManager.getInstance(CurrentMatchActivity.this).sharedPrefsRead(Constants
                 .PREF_USER_ID, "");
 
@@ -178,12 +181,18 @@ public class CurrentMatchActivity extends ActionBarActivity {
                 }
 
                 final MatchParticipantAdapter adapter = new MatchParticipantAdapter(CurrentMatchActivity.this, Arrays
-                        .asList(object.getParticipants()));
+                        .asList(object.getParticipants()).subList(0, 4));
+
+                final MatchParticipantAdapter adapterTwo = new MatchParticipantAdapter(CurrentMatchActivity.this, Arrays
+                        .asList(object.getParticipants()).subList(4, 9));
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mLstCurrentMatch.setAdapter(adapter);
+                        mLstCurrentMatchTeamOne.setAdapter(adapter);
+                        Util.measureListView(mLstCurrentMatchTeamOne, 0);
+                        mLstCurrentMatchTeamTwo.setAdapter(adapterTwo);
+                        Util.measureListView(mLstCurrentMatchTeamTwo, 100);
                     }
                 });
 

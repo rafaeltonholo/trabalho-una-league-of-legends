@@ -10,6 +10,10 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -86,10 +90,10 @@ public class Util {
     /**
      * Pega uma imagem da pasta assets do aplicativo e retorna um drawable para ser usado em um ImageView
      *
-     * @see android.widget.ImageView
-     * @param context Contexto da aplicação
+     * @param context  Contexto da aplicação
      * @param filePath Caminho completo do arquivo, incluindo sua extensão
      * @return Drawable para preencher um ImageView
+     * @see android.widget.ImageView
      */
     public static Drawable getImageFromAssets(Context context, String filePath) {
         AssetManager manager = context.getAssets();
@@ -106,5 +110,35 @@ public class Util {
         }
 
         return drawable;
+    }
+
+    public static boolean measureListView(ListView listView, int offset) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter != null) {
+
+            int numberOfItems = listAdapter.getCount();
+
+            // Get total height of all items.
+            int totalItemsHeight = 0;
+            for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
+                View item = listAdapter.getView(itemPos, null, listView);
+                item.measure(0, 0);
+                totalItemsHeight += item.getMeasuredHeight();
+            }
+
+            // Get total height of all item dividers.
+            int totalDividersHeight = listView.getDividerHeight() * (numberOfItems - 1);
+
+            // Set list height.
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalItemsHeight + offset + totalDividersHeight;
+            listView.setLayoutParams(params);
+            listView.requestLayout();
+
+            return true;
+
+        } else {
+            return false;
+        }
     }
 }

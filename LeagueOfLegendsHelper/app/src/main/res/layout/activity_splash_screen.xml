@@ -8,6 +8,13 @@
                 android:paddingTop="@dimen/activity_vertical_margin"
                 tools:context="br.com.trabalhouna.leagueoflegendshelper.viewcontroller.SplashScreenActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/riot"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"

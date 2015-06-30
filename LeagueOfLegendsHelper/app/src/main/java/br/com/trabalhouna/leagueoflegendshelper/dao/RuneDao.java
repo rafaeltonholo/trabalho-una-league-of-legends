@@ -9,11 +9,10 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.net.HttpURLConnection;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import br.com.trabalhouna.leagueoflegendshelper.R;
+import br.com.trabalhouna.leagueoflegendshelper.data.DbParam;
 import br.com.trabalhouna.leagueoflegendshelper.interfaces.OnAsyncCallbackListener;
 import br.com.trabalhouna.leagueoflegendshelper.task.BaseTask;
 import br.com.trabalhouna.leagueoflegendshelper.task.RuneTask;
@@ -53,7 +52,7 @@ public class RuneDao extends BaseDao<RuneTO> {
         values.put("name", to.getName());
         values.put("description", to.getDescription());
 
-        if(to.getRune() != null) values.put("rune", to.getRune().toString());
+        if (to.getRune() != null) values.put("rune", to.getRune().toString());
 
         return values;
     }
@@ -65,7 +64,7 @@ public class RuneDao extends BaseDao<RuneTO> {
             public void onResponseError(int responseCode) {
                 switch (responseCode) {
                     case HttpURLConnection.HTTP_BAD_REQUEST:
-                        ((Activity)mContext).runOnUiThread(new Runnable() {
+                        ((Activity) mContext).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 Toast.makeText(mContext, "Bad Request", Toast.LENGTH_LONG).show();
@@ -73,7 +72,7 @@ public class RuneDao extends BaseDao<RuneTO> {
                         });
                         break;
                     case HttpURLConnection.HTTP_UNAUTHORIZED:
-                        ((Activity)mContext).runOnUiThread(new Runnable() {
+                        ((Activity) mContext).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 Toast.makeText(mContext, "Sem autorização para executar o método", Toast.LENGTH_LONG)
@@ -83,7 +82,7 @@ public class RuneDao extends BaseDao<RuneTO> {
                         });
                         break;
                     case 429:
-                        ((Activity)mContext).runOnUiThread(new Runnable() {
+                        ((Activity) mContext).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 Toast.makeText(mContext, mContext.getString(R.string.riot_return_http_rate_limit),
@@ -93,7 +92,7 @@ public class RuneDao extends BaseDao<RuneTO> {
                         });
                         break;
                     case HttpURLConnection.HTTP_INTERNAL_ERROR:
-                        ((Activity)mContext).runOnUiThread(new Runnable() {
+                        ((Activity) mContext).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 Toast.makeText(mContext, "Erro do servidor Interno!", Toast.LENGTH_LONG).show();
@@ -102,7 +101,7 @@ public class RuneDao extends BaseDao<RuneTO> {
                         });
                         break;
                     case HttpURLConnection.HTTP_UNAVAILABLE:
-                        ((Activity)mContext).runOnUiThread(new Runnable() {
+                        ((Activity) mContext).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 Toast.makeText(mContext, mContext.getString(R.string.riot_return_http_unavailable),
@@ -115,20 +114,22 @@ public class RuneDao extends BaseDao<RuneTO> {
 
             @Override
             public void onSuccess(StaticResource<RuneTO> object) {
-                if(object == null || object.getData() == null) {
+                if (object == null || object.getData() == null) {
                     listener.callback();
                     return;
                 }
 
                 int count = object.getData().entrySet().size();
 
-                if(object.getData().entrySet().size() <= 0) return;
+                if (object.getData().entrySet().size() <= 0) return;
                 if (RuneDao.this.count() == count) {
                     listener.callback();
                     return;
                 }
 
                 for (Map.Entry<String, RuneTO> entry : object.getData().entrySet()) {
+                    if (count(new DbParam().setColumn("runeId").setValue(entry.getValue().getRuneId())) > 0) continue;
+
                     RuneDao.this.insert(entry.getValue());
                 }
 

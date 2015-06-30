@@ -46,7 +46,7 @@ public final class DbHelper extends SQLiteOpenHelper {
     }
 
     public SQLiteDatabase openConnection() {
-        if (mConnections.getAndIncrement() > 0) return this.mDatabase;
+        if (mConnections.getAndIncrement() > 0 && this.mDatabase != null) return this.mDatabase;
 
         this.mDatabase = super.getWritableDatabase();
 
