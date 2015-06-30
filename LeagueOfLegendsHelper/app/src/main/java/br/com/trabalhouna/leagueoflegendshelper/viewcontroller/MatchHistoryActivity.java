@@ -3,6 +3,7 @@ package br.com.trabalhouna.leagueoflegendshelper.viewcontroller;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -36,6 +37,9 @@ public class MatchHistoryActivity extends ActionBarActivity {
 
         if (!TextUtils.isEmpty(summonerId))
             updateMatchHistory(summonerId);
+
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     public void updateMatchHistory(String summonerId) {
@@ -87,7 +91,6 @@ public class MatchHistoryActivity extends ActionBarActivity {
                 });
     }
 
-    // TODO Adicionar menu de configurações e opção para verificar times da partida atual do jogador
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -108,6 +111,8 @@ public class MatchHistoryActivity extends ActionBarActivity {
                 it = new Intent(this, SettingsActivity.class);
                 startActivity(it);
                 break;
+            case android.R.id.home:
+                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

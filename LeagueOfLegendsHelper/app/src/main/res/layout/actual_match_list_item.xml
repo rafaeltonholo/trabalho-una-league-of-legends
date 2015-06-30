@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/AppTheme.ListItem"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+<LinearLayout style="@style/AppTheme.ListItem"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,23 +19,23 @@
             android:id="@+id/imgCampeaoIcon"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher"/>
 
         <TextView
             android:id="@+id/txtCampeaoNome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Campeao"
-            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+            android:textAppearance="?android:attr/textAppearanceSmallInverse"/>
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/txtCampeaoQtdeJogos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="270 jogos"
-            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+            android:textAppearance="?android:attr/textAppearanceSmallInverse"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
@@ -54,25 +54,25 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:text="Nome do Invocador"
-            android:textAppearance="?android:attr/textAppearanceLargeInverse" />
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"/>
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/txtInvocadorElo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="Elo Jogador"
-            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+            android:textAppearance="?android:attr/textAppearanceSmallInverse"
+            android:visibility="gone"/>
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/txtInvocadorKillRatio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="KDA 8/6.1/5.4"
-            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+            android:textAppearance="?android:attr/textAppearanceSmallInverse"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -81,7 +81,8 @@
             android:paddingRight="5dp"
             android:paddingTop="5dp"
             android:text="Maestrias"
-            android:textAppearance="?android:attr/textAppearanceMediumInverse" />
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/txtInvocadorMaestria"
@@ -89,7 +90,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="21/9/0"
-            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+            android:textAppearance="?android:attr/textAppearanceSmallInverse"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -98,7 +100,7 @@
             android:paddingRight="5dp"
             android:paddingTop="5dp"
             android:text="Runas"
-            android:textAppearance="?android:attr/textAppearanceMediumInverse" />
+            android:textAppearance="?android:attr/textAppearanceMediumInverse"/>
 
         <TextView
             android:id="@+id/txtInvocadorRunas"
@@ -106,7 +108,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:text="xxx de ataque mágico\nyyyy de defesa\nzz% de ouro por segundo"
-            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+            android:textAppearance="?android:attr/textAppearanceSmallInverse"/>
 
 
     </LinearLayout>

@@ -9,14 +9,20 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import br.com.trabalhouna.leagueoflegendshelper.R;
 import br.com.trabalhouna.leagueoflegendshelper.dao.ChampionDao;
+import br.com.trabalhouna.leagueoflegendshelper.dao.RuneDao;
+import br.com.trabalhouna.leagueoflegendshelper.data.DbParam;
 import br.com.trabalhouna.leagueoflegendshelper.fw.Util;
 import br.com.trabalhouna.leagueoflegendshelper.to.CurrentGameInfoTO;
 import br.com.trabalhouna.leagueoflegendshelper.to.MatchParticipantTO;
+import br.com.trabalhouna.leagueoflegendshelper.to.MatchRuneTO;
 import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.ChampionTO;
+import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.RuneTO;
 
 /**
  * Created by Rafael
@@ -26,12 +32,12 @@ import br.com.trabalhouna.leagueoflegendshelper.to.staticresource.ChampionTO;
 public class MatchParticipantAdapter extends BaseAdapter {
     private Context mContext;
     private List<MatchParticipantTO> mList;
-    private ChampionDao mChapionDao;
+    private RuneDao mRuneDao;
 
     public MatchParticipantAdapter(Context context, List<MatchParticipantTO> list) {
         this.mContext = context;
         this.mList = list;
-        this.mChapionDao = new ChampionDao(context);
+        this.mRuneDao = new RuneDao(context);
     }
 
     @Override
@@ -96,6 +102,21 @@ public class MatchParticipantAdapter extends BaseAdapter {
         }.execute();
 
         viewHolder.txtInvocadorNome.setText(participant.getSummonerName());
+
+        MatchRuneTO[] runes = participant.getRunes();
+        if(runes == null || runes.length == 0) viewHolder.txtInvocadorRunas.setText("Sem Runas");
+        else {
+            StringBuilder sbRunes = new StringBuilder();
+
+            for (MatchRuneTO entry : runes) {
+                List<RuneTO> runeList = mRuneDao.read(new DbParam().setColumn("runeId").setValue(entry.getRuneId()));
+                if(runeList == null || runeList.isEmpty()) continue;
+
+                sbRunes.append(entry.getCount()).append("x ").append(runeList.get(0).getDescription()).append("\n");
+            }
+
+            viewHolder.txtInvocadorRunas.setText(sbRunes.toString());
+        }
 
         return convertView;
     }
