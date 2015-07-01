@@ -56,6 +56,8 @@ public class MatchHistoryActivity extends ActionBarActivity {
                     @Override
                     public void onResponseError(int responseCode) {
                         pd.dismiss();
+                        getFragmentManager().beginTransaction().replace(android.R.id.content, new
+                                MatchesNotFoundFragment()).commit();
                     }
 
                     @Override

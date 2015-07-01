@@ -181,16 +181,16 @@ public class CurrentMatchActivity extends ActionBarActivity {
                 }
 
                 final MatchParticipantAdapter adapter = new MatchParticipantAdapter(CurrentMatchActivity.this, Arrays
-                        .asList(object.getParticipants()).subList(0, 4));
+                        .asList(object.getParticipants()).subList(0, 5));
 
                 final MatchParticipantAdapter adapterTwo = new MatchParticipantAdapter(CurrentMatchActivity.this, Arrays
-                        .asList(object.getParticipants()).subList(4, 9));
+                        .asList(object.getParticipants()).subList(5, 10));
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         mLstCurrentMatchTeamOne.setAdapter(adapter);
-                        Util.measureListView(mLstCurrentMatchTeamOne, 0);
+                        Util.measureListView(mLstCurrentMatchTeamOne, 100);
                         mLstCurrentMatchTeamTwo.setAdapter(adapterTwo);
                         Util.measureListView(mLstCurrentMatchTeamTwo, 100);
                     }
